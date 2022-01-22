@@ -10,7 +10,7 @@ module.exports={
         const eight = `https://discordapp.com/oauth2/authorize?client_id=${bot.user.id}&permissions=8&scope=bot`;
         const zero = `https://discordapp.com/oauth2/authorize?client_id=${bot.user.id}&permissions=0&scope=bot`;
 
-        message.channel.send({embed: {
+        message.reply({embeds: [{
             color: bot.color.messagecolor.greyple,
             author: { name: message.author.tag, icon_url: message.author.displayAvatarURL({dynamic: true}) },
             thumbnail: { url: bot.user.avatarURL() },
@@ -24,6 +24,6 @@ module.exports={
               }],
             footer: { text: `${bot.user.username} ©`, icon_url: bot.user.avatarURL() },
             timestamp: new Date(),
-        }})
+        }]})
     }
 }

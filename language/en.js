@@ -30,7 +30,7 @@ module.exports = {
     NOWPLAYING: [ `Channel`, `Duration`, "from playlist", "music", "Requested by", "Progress bar" ],
     QUEUE: [ `Queue for`, "Current song", "Requested by", "song", "in the queue" ],
     SHUFFLE: (length) => `${emotes.v} Queue correctly shuffled (**${length}** songs)`,
-    SKIP: `${emotes.v} The current music has just been skipped correctly`,
+    SKIP: (music) => `${emotes.v} The current music \`${music}\` has just been skipped correctly`,
     STOP: `${emotes.v} Music has just been successfully stopped into this server`,
     FILTERS_DESC: (usage) => `Use the \`${usage}\` command to add a filter on the current song.`,
     INVITE: [ `Administrator permissions`, `Member permissions`, `Click here` ],
@@ -41,7 +41,7 @@ module.exports = {
 
     // CLEAR QUEUE COMMAND
     CLEARQUEUE_ERR: `${emotes.x} There's just one song in the queue`,
-    CLEARQUEUE_SUCCESS: (tracks) => `${emotes.v} The queue has just been successfully deleted (**${tracks - 1}** songs)`,
+    CLEARQUEUE_SUCCESS: (tracks) => `${emotes.v} The queue has just been successfully deleted (**${tracks}** songs)`,
 
 
     // FILTER COMMAND
@@ -52,6 +52,7 @@ module.exports = {
 
 
     // LOOP COMMAND
+    LOOP_ERR: (message) => `${emotes.x} You must first disable the ${message === 'music' ? 'current music' : "queue"} in the loop mode`,
     LOOP_DISABLE: `${emotes.v} Loop mode correctly disabled`,
     LOOP_ENABLE: [ `<:loopmode:793432913823006720> Loop mode enabled the queue will be repeated`, `<:loopmode:793432913823006720> Loop mode enabled, current music will be repeated` ],
 
@@ -99,5 +100,5 @@ With the help of some human translators, ${bot} is available in 2 languages, at 
     // SEEK COMMAND
     SEEK_ERR: [ `${emotes.x} Please enter a correct time (in seconds)`,
     `${emotes.x} An error has occurred, the time entered is incorrect.\nVerify that you have entered a time in seconds that is less than the duration of the music` ],
-    SEEK_SUCCESS: `${emotes.v} The music was correctly advanced` 
+    SEEK_SUCCESS: (time) => `${emotes.v} The music was correctly advanced to ${time}` 
 }

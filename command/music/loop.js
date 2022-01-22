@@ -1,3 +1,5 @@
+const { QueueRepeatMode } = require('discord-player');
+
 module.exports={
     conf:{
         name: "loop",
@@ -7,26 +9,25 @@ module.exports={
         dir: "music",
     },
     run: async (bot, message, args) => {
-        if (!message.member.voice.channel) return message.channel.send(bot.language.PLAY_ERROR[0]);
-        if (message.guild.me.voice.channel && message.member.voice.channel.id !== message.guild.me.voice.channel.id) return message.channel.send(bot.language.PLAY_ERROR[1]);
-        if (!bot.player.getQueue(message)) return message.channel.send(bot.language.ERROR[0]);
+        if (!message.member.voice.channel) return message.reply(bot.language.PLAY_ERROR[0]);
+        if (message.guild.me.voice.channel && message.member.voice.channel.id !== message.guild.me.voice.channel.id) return message.reply(bot.language.PLAY_ERROR[1]);
+
+        const queue = bot.player.getQueue(message.guild.id);
+        if (!queue || !queue.playing) return message.reply(bot.language.ERROR[0]);
 
         if (args.join(" ").toLowerCase() === 'queue') {
-            if (bot.player.getQueue(message).loopMode) {
-                bot.player.setLoopMode(message, false);
-                return message.channel.send(bot.language.LOOP_DISABLE);
-            } else {
-                bot.player.setLoopMode(message, true);
-                return message.channel.send(bot.language.LOOP_ENABLE[0]);
-            };
+            if (queue.repeatMode === 1) return message.reply(bot.language.LOOP_ERR('queue'))
+
+            const success = queue.setRepeatMode(queue.repeatMode === 0 ? QueueRepeatMode.QUEUE : QueueRepeatMode.OFF);
+            let sentance = queue.repeatMode === 0 ? bot.language.LOOP_DISABLE : bot.language.LOOP_ENABLE[0]
+            return message.reply(success ? sentance : bot.language.ERROR[2]);
+
         } else {
-            if (bot.player.getQueue(message).repeatMode) {
-                bot.player.setRepeatMode(message, false);
-                return message.channel.send(bot.language.LOOP_DISABLE);
-            } else {
-                bot.player.setRepeatMode(message, true);
-                return message.channel.send(bot.language.LOOP_ENABLE[1]);
-            };
+            if (queue.repeatMode === 2) return message.reply(bot.language.LOOP_ERR('queue'))
+
+            const success = queue.setRepeatMode(queue.repeatMode === 0 ? QueueRepeatMode.TRACK : QueueRepeatMode.OFF);
+            let sentance = queue.repeatMode === 0 ? bot.language.LOOP_DISABLE : bot.language.LOOP_ENABLE[1]
+            return message.reply(success ? sentance : bot.language.ERROR[2])
         };
     },
 };

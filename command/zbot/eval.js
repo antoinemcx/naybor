@@ -11,9 +11,9 @@ module.exports = {
         cooldown: 3
     },
     run: (bot, message, args) => {
+        let code = args.join(' ');
         try {
-            let ev = eval(args.join(' '))
-
+            let ev = eval(code)
             let str = util.inspect(ev, {
                 depth: 1
             })
@@ -23,12 +23,25 @@ module.exports = {
                 str = str.substr(0, 1900)
                 str = str + "..."
             }
+
+            message.react('832595223564779541');
+            message.reply({embeds: [{
+                author: { name: message.author.tag, icon_url: message.author.displayAvatarURL({dynamic: true}) },
+                color: bot.color.messagecolor.greyple,
+                description: `\`\`\`JS\n${str}\`\`\``,
+                timestamp: new Date(),
+                footer: { text: bot.user.username, icon_url: bot.user.avatarURL() }
+            }]})
             
-            message.react("✅");
-            message.channel.send('**:ballot_box_with_check: Eval réussi:**\n'+ '\`\`\`JS\n' + str + '\`\`\`');}
-        catch (err) {
-            message.react("❌");
-            message.channel.send('**:x: Eval fail:**\n'+'\`\`\`JS\n' + err + '\`\`\`');
+        } catch (err) {
+            message.react('832595223602659379');
+            message.reply({embeds: [{
+                author: { name: message.author.tag, icon_url: message.author.displayAvatarURL({dynamic: true}) },
+                color: bot.color.messagecolor.red,
+                description: `\`\`\`JS\n${err}\`\`\``,
+                timestamp: new Date(),
+                footer: { text: bot.user.username, icon_url: bot.user.avatarURL() }
+            }]})
         }
     }
 }

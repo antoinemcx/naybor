@@ -7,21 +7,24 @@ module.exports={
         dir: "music",
     },
     run: async (bot, message, args) => {
-        if (!message.member.voice.channel) return message.channel.send(bot.language.PLAY_ERROR[0]);
-        if (message.guild.me.voice.channel && message.member.voice.channel.id !== message.guild.me.voice.channel.id) return message.channel.send(bot.language.PLAY_ERROR[1]);
+        if (!message.member.voice.channel) return message.reply(bot.language.PLAY_ERROR[0]);
+        if (message.guild.me.voice.channel && message.member.voice.channel.id !== message.guild.me.voice.channel.id) return message.reply(bot.language.PLAY_ERROR[1]);
 
-        if (!bot.player.getQueue(message)) return message.channel.send(bot.language.ERROR[0]);
-        if (!args[0]) return message.channel.send(bot.language.FILTER_ERR[0]);
+        const queue = bot.player.getQueue(message.guild.id);
+        if (!queue || !queue.playing) return message.reply(bot.language.ERROR[0]);
+        if (!args[0]) return message.reply(bot.language.FILTER_ERR[0]);
 
-        const filterToUpdate = bot.filters.find((x) => x.toLowerCase() === args[0].toLowerCase());
-        if (!filterToUpdate) return message.channel.send(bot.language.FILTER_ERR[1]);
+        const filters = [];
+        queue.getFiltersEnabled().map(x => filters.push(x));
+        queue.getFiltersDisabled().map(x => filters.push(x));
+
+        const filter = filters.find((x) => x.toLowerCase() === args[0].toLowerCase());
+        if (!filter) return message.reply(bot.language.FILTER_ERR[1]);
 
         const filtersUpdated = {};
-        filtersUpdated[filterToUpdate] = bot.player.getQueue(message).filters[filterToUpdate] ? false : true;
+        filtersUpdated[filter] = queue.getFiltersEnabled().includes(filter) ? false : true;
 
-        bot.player.setFilters(message, filtersUpdated);
-
-        if (filtersUpdated[filterToUpdate]) message.channel.send(bot.language.FILTER_SUCCESS[0]);
-        else message.channel.send(bot.language.FILTER_SUCCESS[1]);
+        await queue.setFilters(filtersUpdated);
+        message.reply(queue.getFiltersEnabled().includes(filter) ? bot.language.FILTER_SUCCESS[0] : bot.language.FILTER_SUCCESS[1])
     }
 };

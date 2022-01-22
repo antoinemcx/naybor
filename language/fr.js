@@ -30,7 +30,7 @@ module.exports = {
     NOWPLAYING: [ `Chaîne`, `Durée`, "Dans la playlist", "Musique", "Demandée par", "Barre de progression" ],
     QUEUE: [ `File d'attente pour`, "Piste audio actuelle", "Demandée par", "piste audio", "dans la file d'attente" ],
     SHUFFLE: (length) => `${emotes.v} La file d'attente a bien été mélangé (**${length}** pistes audio)`,
-    SKIP: `${emotes.v} La musique a bien été passée`,
+    SKIP: (music) => `${emotes.v} La musique \`${music}\` a bien été passée`,
     STOP: `${emotes.v} La musique a bien été arrêtée sur ce serveur`,
     FILTERS_DESC: (usage) => `Utilisez la commande \`${usage}\` afin d'ajouter un filtre sur la musique en cours.`,
     INVITE: [ `Permissions administrateur`, `Permissions de membre`, `Clique ici` ],
@@ -41,7 +41,7 @@ module.exports = {
 
     // CLEAR QUEUE COMMAND
     CLEARQUEUE_ERR: `${emotes.x} Il n'y a qu'une seule musique dans la file d'attente`,
-    CLEARQUEUE_SUCCESS: (tracks) => `${emotes.v} La file d'attente a bien été supprimé (**${tracks - 1}** pistes audio)`,
+    CLEARQUEUE_SUCCESS: (tracks) => `${emotes.v} La file d'attente a bien été supprimé (**${tracks}** pistes audio)`,
 
 
     // FILTER COMMAND
@@ -52,6 +52,7 @@ module.exports = {
 
 
     // LOOP COMMAND
+    LOOP_ERR: (message) => `${emotes.x} Vous devez d'abord désactiver la ${message === 'music' ? 'musique en cours' : "file d'attente"} dans le mode boucle`,
     LOOP_DISABLE: `${emotes.v} La boucle a bien été désactivé`,
     LOOP_ENABLE: [ `<:loopmode:793432913823006720> La boucle pour la file d'attente a bien été activée`, `<:loopmode:793432913823006720> La boucle a bien été activée, la musique actuelle sera répétée` ],
 
@@ -99,5 +100,5 @@ Avec l'aide de quelques traducteurs humains, ${bot} est disponible en 2 langues,
     // SEEK COMMAND
     SEEK_ERR: [ `${emotes.x} Veuillez indiquer un temps correct (en secondes)`,
     `${emotes.x} Une erreur est survenue, le temps saisi est incorrect.\nVérifiez que vous avez indiquer un temps en secondes inférieur à la durée de la musique` ],
-    SEEK_SUCCESS: `${emotes.v} La musique a été correctement avancée` 
+    SEEK_SUCCESS: (time) => `${emotes.v} La musique a été correctement avancée à ${time}` 
 }

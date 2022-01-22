@@ -7,18 +7,19 @@ module.exports={
         dir: "music",
     },
     run: async (bot, message, args) => {
-        if (!message.member.voice.channel) return message.channel.send(bot.language.PLAY_ERROR[0]);
-        if (message.guild.me.voice.channel && message.member.voice.channel.id !== message.guild.me.voice.channel.id) return message.channel.send(bot.language.PLAY_ERROR[1]);
+        if (!message.member.voice.channel) return message.reply(bot.language.PLAY_ERROR[0]);
+        if (message.guild.me.voice.channel && message.member.voice.channel.id !== message.guild.me.voice.channel.id) return message.reply(bot.language.PLAY_ERROR[1]);
 
-        if (!bot.player.getQueue(message)) return message.channel.send(bot.language.ERROR[0]);
+        const queue = bot.player.getQueue(message.guild.id);
+        if (!queue || !queue.playing) return message.reply(bot.language.ERROR[0]);
 
         const filtersStatuses = [[], []];
         bot.filters.forEach((filterName) => {
             const array = filtersStatuses[0].length > filtersStatuses[1].length ? filtersStatuses[1] : filtersStatuses[0];
-            array.push(filterName.charAt(0).toUpperCase() + filterName.slice(1) + " **»** " + (bot.player.getQueue(message).filters[filterName] ? bot.emotes.v : bot.emotes.x));
+            array.push(filterName.charAt(0).toUpperCase() + filterName.slice(1) + " **»** " + (queue.getFiltersEnabled().includes(filterName) ? bot.emotes.v : bot.emotes.x));
         });
 
-        message.channel.send({embed: {
+        message.reply({embeds: [{
             color: bot.color.messagecolor.greyple,
             author: { name: message.author.tag, icon_url: message.author.displayAvatarURL({dynamic: true}) },
             thumbnail: { url: message.guild.iconURL({size: 1024}) },
@@ -29,6 +30,6 @@ module.exports={
             ],
             footer: { text: `${bot.user.username} ©`, icon_url: bot.user.avatarURL() },
             timestamp: new Date(),
-        }});
+        }]});
     },
 };

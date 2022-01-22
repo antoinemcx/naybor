@@ -10,21 +10,21 @@ module.exports={
         dir: 'zbot'
     },
     run :async (bot, message, args) => {
-        const Contributors = [
-            '741747137506836531'
-        ];
-        message.channel.send({embed: {
+        let owner = bot.users.cache.get(bot.config.owner);
+
+        message.reply({embeds: [{
             color: bot.color.messagecolor.greyple,
             author: { name: bot.user.username, icon_url: bot.user.avatarURL() },
             description: bot.language.BOTINFO_DESCRIPTION(bot.user.username),
             fields: [{
                 name: `<:bot:793496888618778641> ${bot.user.username}`,
-                value: `${bot.language.BOTINFO[0]} : \`${bot.users.cache.get(bot.config.owner).tag}\`\n${bot.language.BOTINFO[1]} : ${Contributors.map(c=>`\`${bot.users.cache.get(c).tag}\``).join(' - ')}`
+                value: `${bot.language.BOTINFO[0]} : \`${owner.username}#${owner.discriminator}\``
             },
             {
                 name: `<:stats:793506201518211112> ${bot.language.BOTINFO[5]}`,
                 value: `${bot.language.BOTINFO[2]} : \`${bot.guilds.cache.size} ${bot.language.BOTINFO[3]}\`
-${bot.language.BOTINFO[4]} : \`${bot.channels.cache.size.toLocaleString()} ${bot.language.BOTINFO[4].toLowerCase()}\`\n${bot.language.BOTINFO[6]} : \`${bot.voice.connections.size} ${bot.language.BOTINFO[4].toLowerCase()}\`
+${bot.language.BOTINFO[4]} : \`${bot.channels.cache.size.toLocaleString()} ${bot.language.BOTINFO[4].toLowerCase()}\`
+${bot.language.BOTINFO[6]} : \`${bot.voice.adapters.size.toLocaleString()} ${bot.language.BOTINFO[4].toLowerCase()}\`
 ${bot.language.BOTINFO[7]} : \`${bot.commandes.size} ${bot.language.BOTINFO[7].toLowerCase()}\``
             },
             {
@@ -37,6 +37,6 @@ ${bot.language.BOTINFO[7]} : \`${bot.commandes.size} ${bot.language.BOTINFO[7].t
 RAM : \`${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}\`/\`${(os.totalmem() / 1024 / 1024).toFixed(2)} MB\`\n
 **↬** [\`${bot.language.HELP_EMBED[0]} ${bot.user.username}\`](https://discordapp.com/oauth2/authorize?client_id=${bot.user.id}&permissions=8&scope=bot)`
             }]
-        }})
+        }]})
     }
 };

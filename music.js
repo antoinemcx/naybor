@@ -1,5 +1,11 @@
 const { Client, Collection } = require("discord.js");
-const bot = new Client({ fetchAllMembers: true });
+const bot = new Client({
+    intents: ["GUILDS", "GUILD_MEMBERS", "GUILD_MESSAGES", "GUILD_MESSAGE_REACTIONS", "DIRECT_MESSAGES", "GUILD_VOICE_STATES"],
+    allowedMentions: {
+        parse: ['users', 'roles'],
+        repliedUser: false
+    },
+});
 module.exports = bot;
 
 const fs = require('fs');
@@ -23,41 +29,41 @@ bot.commands = new Collection();
 require('./utils/errorHandler')(bot);
 
 
-bot.player.on('trackStart', (message, track) => message.channel.send(bot.language.TRACKSTART(track.title, message.member.voice.channel)))
-.on('trackAdd', (message, queue, track) => message.channel.send(bot.language.TRACKADD(track)))
-.on('playlistAdd', (message, queue, playlist) => message.channel.send(bot.language.PLAYLISTADD(playlist)))
-.on('searchResults', (message, query, tracks) => {
-    message.channel.send({
-        embed: {
-            color: bot.color.messagecolor.greyple,
-            author: { name: message.author.tag, icon_url: message.author.displayAvatarURL({dynamic: true}) },
-            description: `${tracks.map((t, i) => `\`${i + 1}.\` [${t.title}](${t.url})`).join('\n')}\n\n${bot.language.SEARCHRESULTS}`,
-            footer: { text: `${bot.user.username} ©`, icon_url: bot.user.avatarURL() },
-            timestamp: new Date(),
-        },
-    });
-})
-.on('searchInvalidResponse', (message, query, tracks, content, collector) => {
-    if (content === 'cancel') {
-        collector.stop();
-        return message.channel.send(bot.language.SEARCHINVALIDRESPONSE);
-    } else message.channel.send(bot.language.SEARCHERROR(tracks.length));
-})
-.on('searchCancel', (message, query, tracks) => message.channel.send(bot.language.SEARCHCANCEL))
-.on('noResults', (message, query) => message.channel.send(bot.language.NORESULTS(query)))
-.on('queueEnd', (message, queue) => message.channel.send(bot.language.QUEUEEND))
-.on('channelEmpty', (message, queue) => message.channel.send(bot.language.CHANNELEMPTY))
-.on('botDisconnect', (message) => message.channel.send(bot.language.BOTDISCONNECT))
-.on('error', (error, message) => {
+bot.player.on('trackStart', (queue, track) => { queue.metadata.send(bot.language.TRACKSTART(track.title, queue.connection.channel)) })
+.on('trackAdd', (queue, track) => queue.metadata.send(bot.language.TRACKADD(track)))
+.on('playlistAdd', (queue, playlist) => queue.metadata.send(bot.language.PLAYLISTADD(playlist)))
+// .on('searchResults', (queue, query, tracks) => {
+//     queue.metadata.send({
+//         embeds: [{
+//             color: bot.color.messagecolor.greyple,
+//             author: { name: message.author.tag, icon_url: message.author.displayAvatarURL({dynamic: true}) },
+//             description: `${tracks.map((t, i) => `\`${i + 1}.\` [${t.title}](${t.url})`).join('\n')}\n\n${bot.language.SEARCHRESULTS}`,
+//             footer: { text: `${bot.user.username} ©`, icon_url: bot.user.avatarURL() },
+//             timestamp: new Date(),
+//         }],
+//     });
+// })
+// .on('searchInvalidResponse', (queue, query, tracks, content, collector) => {
+//     if (content === 'cancel') {
+//         collector.stop();
+//         return queue.metadata.send(bot.language.SEARCHINVALIDRESPONSE);
+//     } else queue.metadata.send(bot.language.SEARCHERROR(tracks.length));
+// })
+// .on('searchCancel', (queue, query, tracks) => queue.metadata.send(bot.language.SEARCHCANCEL))
+.on('noResults', (queue, query) => queue.metadata.send(bot.language.NORESULTS(query)))
+.on('queueEnd', (queue) => queue.metadata.send(bot.language.QUEUEEND))
+.on('botDisconnect', (queue) => queue.metadata.send(bot.language.BOTDISCONNECT))
+.on('channelEmpty', (queue) => queue.metadata.send(bot.language.CHANNELEMPTY))
+.on('error', (queue, error) => {
     switch (error) {
         case 'NotPlaying':
-            message.channel.send(bot.language.ERROR[0]);
+            queue.metadata.send(bot.language.ERROR[0]);
             break;
         case 'NotConnected':
-            message.channel.send(bot.language.PLAY_ERROR[0]);
+            queue.metadata.send(bot.language.PLAY_ERROR[0]);
             break;
         case 'UnableToJoin':
-            message.channel.send(bot.language.ERROR[1]);
+            queue.metadata.send(bot.language.ERROR[1]);
             break;
     };
 })

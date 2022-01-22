@@ -17,7 +17,7 @@ module.exports = async (bot, message) => {
 
     // BOT MENTION
     if(message.content.match(new RegExp(`^<@!?${bot.user.id}>( |)$`))){
-        message.channel.send(bot.language.BOT_MENTION(prefix))
+        message.reply(bot.language.BOT_MENTION(prefix))
         return
     }
 
@@ -50,7 +50,7 @@ module.exports = async (bot, message) => {
         const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
     if (now < expirationTime) {
         const timeLeft = (expirationTime - now) / 1000;
-        return message.channel.send(bot.language.BOT_COOLDOWN(timeLeft.toFixed(1), props.conf.name));
+        return message.reply(bot.language.BOT_COOLDOWN(timeLeft.toFixed(1), props.conf.name));
     }
     }
     timestamps.set(message.author.id, now);
@@ -58,7 +58,7 @@ module.exports = async (bot, message) => {
 
 
     if(props.conf.private === true) { 
-        if(message.author.id !== bot.config.owner) return message.channel.send(bot.language.PRIVATE_CMD)
+        if(message.author.id !== bot.config.owner) return message.reply(bot.language.PRIVATE_CMD)
     }
     // CHARGEMENT DE LA COMMANDE
     try {

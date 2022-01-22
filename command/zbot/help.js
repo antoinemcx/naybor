@@ -24,7 +24,7 @@ module.exports={
                 if (!categorie.includes(c.conf.dir)) {await categorie.push(c.conf.dir)}
             });
 
-            message.channel.send({embed: { // [text](link) ● [text](link)..
+            message.reply({embeds: [{ // [text](link) ● [text](link)..
                 color: bot.color.messagecolor.greyple,
                 author: { name: bot.language.HELP(bot.user.username), icon_url: bot.user.avatarURL() },
                 thumbnail: { url: bot.user.avatarURL({size: 1024}) },
@@ -39,7 +39,7 @@ module.exports={
                 }),
                 footer: { text: `${bot.user.username} ©` },
                 timestamp: new Date()
-            }})
+            }]})
 
         } else {
             let command = args[0];
@@ -62,8 +62,8 @@ module.exports={
             }
             let usage = command.conf.usage;
 
-            message.channel.send({
-                embed: {
+            message.reply({
+                embeds: [{
                     color: bot.color.messagecolor.greyple,
                     author: { name: `help - ${command.conf.name}`, icon_url: message.author.displayAvatarURL({dynamic: true}) },
                     thumbnail: { url: bot.user.avatarURL({size: 1024}) },
@@ -90,7 +90,7 @@ module.exports={
                     ],
                     footer: { icon_url: bot.user.avatarURL(), text: `${bot.user.username} ©` },
                     timestamp: new Date()
-                }
+                }]
             }).catch(e => {
                 bot.emit("error", e, message);
             });

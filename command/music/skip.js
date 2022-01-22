@@ -3,16 +3,18 @@ module.exports={
         name: "skip",
         description: "Allows you to skip the music and therefore to play the next one",
         usage: '<prefix>skip',
-        aliases: ["sk"],
+        aliases: ["sk", 's', 'fs'],
         dir: "music",
     },
     run: async (bot, message, args) => {
-        if (!message.member.voice.channel) return message.channel.send(bot.language.PLAY_ERROR[0]);
-        if (message.guild.me.voice.channel && message.member.voice.channel.id !== message.guild.me.voice.channel.id) return message.channel.send(bot.language.PLAY_ERROR[1]);
+        if (!message.member.voice.channel) return message.reply(bot.language.PLAY_ERROR[0]);
+        if (message.guild.me.voice.channel && message.member.voice.channel.id !== message.guild.me.voice.channel.id) return message.reply(bot.language.PLAY_ERROR[1]);
 
-        if (!bot.player.getQueue(message)) return message.channel.send(bot.language.ERROR[0]);
+        const queue = bot.player.getQueue(message.guild.id)
+        if (!queue || !queue.playing) return message.reply(bot.language.ERROR[0]);
 
-        bot.player.skip(message);
-        message.channel.send(bot.language.SKIP);
+        // bot.player.skip(message);
+        queue.skip();
+        message.reply(bot.language.SKIP(queue.current));
     },
 };
