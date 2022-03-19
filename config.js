@@ -10,10 +10,10 @@ module.exports = {
     },
     
     emotes: { 
-        v: `<:yes:793239752757084229>`,
-        x: `<:no:793239752311963688>`,
-        music: `<:music:793245729941880863>`,
-        info: `<:info:793424403073335317>`
+        v: `<:yes:954865655973290024>`,
+        x: `<:no:954865655990063184>`,
+        music: `<:music:954865648348057642>`,
+        info: `<:info:954865653972623410>`
     },
 
     filters: ['8D', 'gate', 'haas', 'phaser', 'treble', 'tremolo', 'vibrato', 'reverse', 'karaoke', 'flanger', 'mcompand', 'pulsator', 'subboost', 'bassboost', 'vaporwave', 'nightcore', 'normalizer', 'surrounding'],

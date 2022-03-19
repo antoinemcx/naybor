@@ -14,8 +14,8 @@ module.exports={
 
         const cat = {
             music: `${bot.emotes.music} ${bot.language.HELP_CAT[0]}`,
-            zbot: `<:bot:793496888618778641> ${bot.user.username}`,
-            configuration: `<:config:793773514406100992> Configuration`
+            zbot: `<:bot:954865650059317319> ${bot.user.username}`,
+            configuration: `<:config:954865649627308112> Configuration`
         }
 
         if(!args[0]) {

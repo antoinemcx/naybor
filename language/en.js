@@ -2,7 +2,7 @@ const { emotes } = require('../config');
 
 module.exports = {
     BOT_MENTION: (prefix) => `Hello, in this server, my prefix is \`${prefix}\`.\nUse the \`${prefix}help\` command to get the list of my commands if you're lost.`,
-    BOT_COOLDOWN: (time, cmd) => `<:cooldown:793499078909755393> You have **${time}** second(s) before you can use the \`${cmd}\` command`,
+    BOT_COOLDOWN: (time, cmd) => `<:cooldown:954865653507039322> You have **${time}** second(s) before you can use the \`${cmd}\` command`,
     WRONG_USAGE: (usage) => `${emotes.x} Wrong usage.\nUse \`${usage.replace('<prefix>', '')}\``,
     PRIVATE_CMD: `${emotes.x} This command is private`,
     MISSING_PERMISSION: (permission) => `${emotes.x} You do not have the necessary permissions to use this command (\`${permission}\`)`,
@@ -10,7 +10,7 @@ module.exports = {
 
     // DISCORD-PLAYER MESSAGES
     TRACKSTART: (title, channel) => `${emotes.music} Playing \`${title}\` into **${channel.name}**`,
-    TRACKADD: (track) => `<:musiccd:793466362256424960> \`${track.title}\` has been correctly added to the queue (**${track.duration}**)`,
+    TRACKADD: (track) => `<:musiccd:954865655595798528> \`${track.title}\` has been correctly added to the queue (**${track.duration}**)`,
     PLAYLISTADD: (playlist) => `${emotes.music} \`${playlist.title}\` added to the queue (**${playlist.tracks.length}** songs)`,
     SEARCHRESULTS: `Type the number of the music you want to listen to. Or \`cancel\` to exit.`,
     SEARCHINVALIDRESPONSE: `${emotes.v} Search successfully canceled`,
@@ -54,7 +54,7 @@ module.exports = {
     // LOOP COMMAND
     LOOP_ERR: (message) => `${emotes.x} You must first disable the ${message === 'music' ? 'current music' : "queue"} in the loop mode`,
     LOOP_DISABLE: `${emotes.v} Loop mode correctly disabled`,
-    LOOP_ENABLE: [ `<:loopmode:793432913823006720> Loop mode enabled the queue will be repeated`, `<:loopmode:793432913823006720> Loop mode enabled, current music will be repeated` ],
+    LOOP_ENABLE: [ `<:loopmode:954865651632209980> Loop mode enabled the queue will be repeated`, `<:loopmode:954865651632209980> Loop mode enabled, current music will be repeated` ],
 
 
     // PAUSE COMMAND
@@ -64,12 +64,12 @@ module.exports = {
 
     // RESUME COMMAND
     RESUME_ERR: `${emotes.x} Current music is already playing`,
-    RESUME_SUCCESS: `<:micro:793475053936443403> The current music has just been resumed`,
+    RESUME_SUCCESS: `<:micro:954865649300148354> The current music has just been resumed`,
 
 
     // VOLUME COMMAND
     VOLUME_ERR: `${emotes.x} Please enter a valid number between **1** and **100**`,
-    VOLUME_SUCCESS: (volume) => `<:volume:793480024287084544> Volume correctly set to \`${volume}%\``,
+    VOLUME_SUCCESS: (volume) => `<:volume:954865647949598760> Volume correctly set to \`${volume}%\``,
 
 
     // HELP COMMAND
