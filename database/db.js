@@ -1,5 +1,5 @@
 const mariadb = require('mariadb');
-const config = require('../../music/config');
+const config = require('../config');
 
 const db = mariadb.createPool({
      host: config.db.host, 

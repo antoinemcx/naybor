@@ -1,10 +1,10 @@
-const fetch = require('node-fetch');
+const { get } = require('axios');
 
 module.exports = async (bot,guild) => {
     var guilds = bot.guilds.cache.size
     bot.db.query(`INSERT INTO guild (guildID) VALUES (${guild.id});`)
 
-    fetch(`https://discord.com/api/v6/users/${guild.ownerId}`, { headers: { Authorization: `Bot ${bot.config.token}` } }).then(data => { data.json().then(owner => {
+    get(`https://discord.com/api/v6/users/${guild.ownerId}`, { headers: { Authorization: `Bot ${bot.config.token}` } }).then(data => { data.json().then(owner => {
         bot.guilds.cache.get('738122381062832180').channels.cache.get('829257458454495233').send({embeds: [{
             color: bot.color.messagecolor.green,
             thumbnail: { url: guild.iconURL({format: 'png', size: 1024}) },
