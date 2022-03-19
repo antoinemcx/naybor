@@ -1,3 +1,5 @@
+const fetch = require('node-fetch');
+
 module.exports = async (bot,guild) => {
     var guilds = bot.guilds.cache.size
     bot.db.query(`DELETE FROM guild WHERE guildID = '${guild.id}';`)

@@ -54,6 +54,7 @@ bot.player.on('trackStart', (queue, track) => { queue.metadata.send(bot.language
 .on('queueEnd', (queue) => queue.metadata.send(bot.language.QUEUEEND))
 .on('botDisconnect', (queue) => queue.metadata.send(bot.language.BOTDISCONNECT))
 .on('channelEmpty', (queue) => queue.metadata.send(bot.language.CHANNELEMPTY))
+.on('connectionError', (queue, error) => { queue.metadata.send(`Error`); console.log(error) })
 .on('error', (queue, error) => {
     switch (error) {
         case 'NotPlaying':

@@ -27,9 +27,10 @@ module.exports={
 
         try {
             if(!queue.connection) await queue.connect(message.member.voice.channel);
-        } catch {
+        } catch (e) {
             player.deleteQueue(message.guild.id)
             message.reply(bot.language.ERROR[1]);
+            console.log(e)
         }
 
         song.playlist ? queue.addTracks(song.tracks) : queue.addTrack(song.tracks[0]);
