@@ -1,0 +1,7 @@
+CREATE DATABASE music;
+
+CREATE TABLE guild (
+    guildID VARCHAR(200) NOT NULL PRIMARY KEY,
+    lang VARCHAR(45) DEFAULT 'en',
+    prefix VARCHAR(45) DEFAULT 'n!',
+);

@@ -9,6 +9,4 @@ function findServer(bot, id) {
     });
 };
 
-module.exports = {
-    findServer,
-}
+module.exports = { findServer, }
