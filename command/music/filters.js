@@ -21,7 +21,7 @@ module.exports={
 
         message.reply({embeds: [{
             color: client.color.messagecolor.greyple,
-            author: { name: message.author.tag, icon_url: message.author.displayAvatarURL({dynamic: true}) },
+            author: { name: message.author.tag, icon_url: message.author.displayAvatarURL({dynamic: true}), url: `https://github.com/meliooff/naybor` },
             thumbnail: { url: message.guild.iconURL({size: 1024}) },
             description: client.language.FILTERS_DESC(client.commandes.get('filter').conf.usage),
             fields: [

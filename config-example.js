@@ -8,6 +8,8 @@ module.exports = {
         password: "",
         database: "",
     },
+    serverID: "", //Your main server ID
+    logChannel: "", //The channel where logs will be posted (in the server defined up there)
     
     emotes: { //Feel free to put some custom emotes (obviously recommended)
         v: `✅`,

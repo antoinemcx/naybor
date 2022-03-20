@@ -26,7 +26,7 @@ module.exports={
 
         message.reply({embeds: [{
             color: client.color.messagecolor.greyple,
-            author: { name: message.author.tag, icon_url: message.author.displayAvatarURL({dynamic: true}) },
+            author: { name: message.author.tag, icon_url: message.author.displayAvatarURL({dynamic: true}), url: `https://github.com/meliooff/naybor` },
             description: `${song.tracks.slice(0, 10).map((t, i) => `\`${i + 1}.\` [${t.title}](${t.url})`).join('\n')}\n\n${client.language.SEARCHRESULTS}`,
             footer: { text: `${client.user.username} ©`, icon_url: client.user.avatarURL() },
             timestamp: new Date(),

@@ -14,7 +14,7 @@ module.exports={
 
         message.reply({embeds: [{
             color: client.color.messagecolor.greyple,
-            author: { name: client.user.username, icon_url: client.user.avatarURL() },
+            author: { name: client.user.username, icon_url: client.user.avatarURL(), url: `https://github.com/meliooff/naybor` },
             description: client.language.BOTINFO_DESCRIPTION(client.user.username),
             fields: [{
                 name: `${client.emotes.bot} ${client.user.username}`,

@@ -26,7 +26,7 @@ module.exports={
 
             message.reply({embeds: [{ // [text](link) ● [text](link)..
                 color: client.color.messagecolor.greyple,
-                author: { name: client.language.HELP(client.user.username), icon_url: client.user.avatarURL() },
+                author: { name: client.language.HELP(client.user.username), icon_url: client.user.avatarURL(), url: `https://github.com/meliooff/naybor` },
                 thumbnail: { url: client.user.avatarURL({size: 1024}) },
                 description: `**↬** [\`${client.language.HELP_EMBED[0]} ${client.user.username}\`](https://discordapp.com/oauth2/authorize?client_id=${client.user.id}&permissions=8&scope=bot)
 **↬** \`${prefix}help <commandName>\` ${client.language.HELP_EMBED[1]}`,
@@ -65,7 +65,7 @@ module.exports={
             message.reply({
                 embeds: [{
                     color: client.color.messagecolor.greyple,
-                    author: { name: `help - ${command.conf.name}`, icon_url: message.author.displayAvatarURL({dynamic: true}) },
+                    author: { name: `help - ${command.conf.name}`, icon_url: message.author.displayAvatarURL({dynamic: true}), url: `https://github.com/meliooff/naybor` },
                     thumbnail: { url: client.user.avatarURL({size: 1024}) },
                     description: `**↬** Prefix : \`${prefix}\`\n**↬** [] = \`${client.language.HELP_CMD[1]}\` / <> = \`${client.language.HELP_CMD[2]}\`\n**»** \`${command.conf.description}\`\nᅠ`,
                     fields: [{

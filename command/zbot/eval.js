@@ -26,7 +26,7 @@ module.exports = {
 
             message.react('832595223564779541');
             message.reply({embeds: [{
-                author: { name: message.author.tag, icon_url: message.author.displayAvatarURL({dynamic: true}) },
+                author: { name: message.author.tag, icon_url: message.author.displayAvatarURL({dynamic: true}), url: `https://github.com/meliooff/naybor` },
                 color: client.color.messagecolor.greyple,
                 description: `\`\`\`JS\n${str}\`\`\``,
                 timestamp: new Date(),
@@ -36,7 +36,7 @@ module.exports = {
         } catch (err) {
             message.react('832595223602659379');
             message.reply({embeds: [{
-                author: { name: message.author.tag, icon_url: message.author.displayAvatarURL({dynamic: true}) },
+                author: { name: message.author.tag, icon_url: message.author.displayAvatarURL({dynamic: true}), url: `https://github.com/meliooff/naybor` },
                 color: client.color.messagecolor.red,
                 description: `\`\`\`JS\n${err}\`\`\``,
                 timestamp: new Date(),
