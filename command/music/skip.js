@@ -13,7 +13,6 @@ module.exports={
         const queue = bot.player.getQueue(message.guild.id)
         if (!queue || !queue.playing) return message.reply(bot.language.ERROR[0]);
 
-        // bot.player.skip(message);
         queue.skip();
         message.reply(bot.language.SKIP(queue.current));
     },

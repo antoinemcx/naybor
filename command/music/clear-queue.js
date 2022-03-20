@@ -15,7 +15,6 @@ module.exports={
         const tracks = queue.tracks.length;
         if (!queue.tracks[0]) return message.reply(bot.language.CLEARQUEUE_ERR);
 
-        // bot.player.clearQueue(message);
         await queue.clear();
         message.reply(bot.language.CLEARQUEUE_SUCCESS(tracks));
     }

@@ -16,7 +16,6 @@ module.exports={
         if (!args[0] || isNaN(args[0]) || args[0] === 'Infinity') return message.reply(bot.language.VOLUME_ERR);
         if (Math.round(parseInt(args[0])) < 1 || Math.round(parseInt(args[0])) > 100) return message.reply(bot.language.VOLUME_ERR);
 
-        // bot.player.setVolume(message, parseInt(args[0]));
         queue.setVolume(parseInt(args[0]))
         message.reply(bot.language.VOLUME_SUCCESS(parseInt(args[0])));
     },

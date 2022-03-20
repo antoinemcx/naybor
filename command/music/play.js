@@ -15,7 +15,6 @@ module.exports={
         if (!args[0]) return message.reply(bot.language.WRONG_USAGE(module.exports.conf.usage));
 
         const player = bot.player;
-        // bot.player.play(message, args.join(" "), { firstResult: true });
         const queue = await player.createQueue(message.guild, {
             metadata: message.channel
         });

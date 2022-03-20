@@ -14,7 +14,6 @@ module.exports={
         if(!queue || !queue.playing) return message.reply(bot.language.ERROR[0]);
         if (!queue.previousTracks[1]) return message.reply(`Previous track isn't founded`)
 
-        // await bot.player.back(message);
         await queue.back();
         message.reply(bot.language.BACK)
     }

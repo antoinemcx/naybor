@@ -14,7 +14,6 @@ module.exports={
 
         if (!args[0]) return message.reply(bot.language.WRONG_USAGE(module.exports.conf.usage));
 
-        // bot.player.play(message, args.join(" "));
         const player = bot.player;
         const song = await player.search(args.join(" "), {
             requestedBy: message.author,
@@ -52,7 +51,6 @@ module.exports={
                 return message.channel.send(bot.language.ERRROR[1]);
             }
 
-            // await message.channel.send(`Loading your search... 🎧`);
             queue.addTrack(song.tracks[query.content - 1]);
             if (!queue.playing) await queue.play();
         });

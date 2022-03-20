@@ -2,7 +2,7 @@ const { emotes } = require('../config');
 
 module.exports = {
     BOT_MENTION: (prefix) => `Bonjour, dans ce serveur, mon préfixe est \`${prefix}\`.\nUtilisez la commande \`${prefix}help\` afin d'obtenir la liste de mes commandes si vous êtes perdu.`,
-    BOT_COOLDOWN: (time, cmd) => `<:cooldown:954865653507039322> Il reste **${time}** seconde(s) avant de pouvoir réutiliser la commande \`${cmd}\``,
+    BOT_COOLDOWN: (time, cmd) => `${emotes.cooldown} Il reste **${time}** seconde(s) avant de pouvoir réutiliser la commande \`${cmd}\``,
     WRONG_USAGE: (usage) => `${emotes.x} Ce n'est pas la bonne utilisation.\nUtilisez \`${usage.replace('<prefix>', '')}\``,
     PRIVATE_CMD: `${emotes.x} Cette commande est privée`,
     MISSING_PERMISSION: (permission) => `${emotes.x} Vous ne disposez pas des permissions nécessaires pour utiliser cette commande (\`${permission}\`)`,
@@ -10,7 +10,7 @@ module.exports = {
 
     // DISCORD-PLAYER MESSAGES
     TRACKSTART: (title, channel) => `${emotes.music} En train de jouer \`${title}\` dans le salon **${channel.name}**`,
-    TRACKADD: (track) => `<:musiccd:954865655595798528> \`${track.title}\` a bien été ajouté à la file d'attente (**${track.duration}**)`,
+    TRACKADD: (track) => `${emotes.musiccd} \`${track.title}\` a bien été ajouté à la file d'attente (**${track.duration}**)`,
     PLAYLISTADD: (playlist) => `${emotes.music} \`${playlist.title}\` a été ajouté à la file d'attente (**${playlist.tracks.length}** songs)`,
     SEARCHRESULTS: `Entrez le numéro de la musique que vous souhaitez écouter. Ou \`cancel\` pour quitter.`,
     SEARCHINVALIDRESPONSE: `${emotes.v} La recherche a bien été annulé`,
@@ -54,7 +54,7 @@ module.exports = {
     // LOOP COMMAND
     LOOP_ERR: (message) => `${emotes.x} Vous devez d'abord désactiver la ${message === 'music' ? 'musique en cours' : "file d'attente"} dans le mode boucle`,
     LOOP_DISABLE: `${emotes.v} La boucle a bien été désactivé`,
-    LOOP_ENABLE: [ `<:loopmode:954865651632209980> La boucle pour la file d'attente a bien été activée`, `<:loopmode:954865651632209980> La boucle a bien été activée, la musique actuelle sera répétée` ],
+    LOOP_ENABLE: [ `${emotes.loopmode} La boucle pour la file d'attente a bien été activée`, `${emotes.loopmode} La boucle a bien été activée, la musique actuelle sera répétée` ],
 
 
     // PAUSE COMMAND
@@ -64,12 +64,12 @@ module.exports = {
 
     // RESUME COMMAND
     RESUME_ERR: `${emotes.x} La musique actuelle est déjà en cours`,
-    RESUME_SUCCESS: `<:micro:954865649300148354> La musique actuelle a bien été relancée`,
+    RESUME_SUCCESS: `${emotes.micro} La musique actuelle a bien été relancée`,
 
 
     // VOLUME COMMAND
     VOLUME_ERR: `${emotes.x} Veuillez entrer un nombre valide entre **1** et **100**`,
-    VOLUME_SUCCESS: (volume) => `<:volume:954865647949598760> Le volume a bien été fixé à \`${volume}%\``,
+    VOLUME_SUCCESS: (volume) => `${emotes.volume} Le volume a bien été fixé à \`${volume}%\``,
 
 
     // HELP COMMAND

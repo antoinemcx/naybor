@@ -16,12 +16,10 @@ module.exports={
         if(!queue || !queue.playing) return message.reply(bot.language.ERROR[0]);
         
         if(!args[0]) return message.reply(bot.language.WRONG_USAGE(module.exports.conf.usage))
-        // if(isNaN(args[0]) || args[0] <= 0) return message.reply(bot.language.SEEK_ERR[0])
         const time = ms(args.join(' '));
         if(time >= queue.current.durationMS) return message.reply(bot.language.SEEK_ERR[1])
 
         try {
-            // await bot.player.seek(message, parseFloat(time))
             await queue.seek(time)
             message.reply(bot.language.SEEK_SUCCESS(ms(time, { long: true })))
         } catch(e) {
