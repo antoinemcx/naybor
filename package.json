@@ -1,11 +1,11 @@
 {
   "name": "naybor",
-  "main": "music.js",
-  "author": "MelioOff",
-  "version": "2.0.0",
-  "description": "A complete code to download for a music bot. Using a module (discord-player).",
+  "main": "naybor.js",
+  "author": "meliooff",
+  "version": "1.0.0",
+  "description": "Complete discord music bot (multilingual, configurable and much more) using discord-player notably.",
   "scripts": {
-    "start": "node music.js"
+    "start": "node naybor.js"
   },
   "dependencies": {
     "@discordjs/opus": "^0.7.0",

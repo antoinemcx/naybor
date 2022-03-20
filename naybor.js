@@ -1,43 +1,43 @@
 const { Client, Collection } = require("discord.js");
-const bot = new Client({
+const client = new Client({
     intents: ["GUILDS", "GUILD_MEMBERS", "GUILD_MESSAGES", "GUILD_MESSAGE_REACTIONS", "DIRECT_MESSAGES", "GUILD_VOICE_STATES"],
     allowedMentions: {
         parse: ['users', 'roles'],
         repliedUser: false
     },
 });
-module.exports = bot;
+module.exports = client;
 
 const fs = require('fs');
 const { Player } = require('discord-player');
 
 //SET COLLECTION
-bot.commandes = new Collection();
-bot.aliases = new Collection();
+client.commandes = new Collection();
+client.aliases = new Collection();
 cooldowns = new Collection();
 
 //SET UTILS
-bot.color = require('./utils/color.js');
-bot.db = require('./database/db');
-bot.player = new Player(bot);
-bot.config = require('./config.js');
-bot.emotes = bot.config.emotes;
-bot.filters = bot.config.filters;
-bot.commands = new Collection();
+client.color = require('./utils/color.js');
+client.db = require('./database/db');
+client.player = new Player(client);
+client.config = require('./config.js');
+client.emotes = client.config.emotes;
+client.filters = client.config.filters;
+client.commands = new Collection();
 
-require('./utils/errorHandler')(bot);
+require('./utils/errorHandler')(client);
 
 
-bot.player.on('trackStart', (queue, track) => { queue.metadata.send(bot.language.TRACKSTART(track.title, queue.connection.channel)) })
-.on('trackAdd', (queue, track) => queue.metadata.send(bot.language.TRACKADD(track)))
-.on('playlistAdd', (queue, playlist) => queue.metadata.send(bot.language.PLAYLISTADD(playlist)))
+client.player.on('trackStart', (queue, track) => { queue.metadata.send(client.language.TRACKSTART(track.title, queue.connection.channel)) })
+.on('trackAdd', (queue, track) => queue.metadata.send(client.language.TRACKADD(track)))
+.on('playlistAdd', (queue, playlist) => queue.metadata.send(client.language.PLAYLISTADD(playlist)))
 // .on('searchResults', (queue, query, tracks) => {
 //     queue.metadata.send({
 //         embeds: [{
-//             color: bot.color.messagecolor.greyple,
+//             color: client.color.messagecolor.greyple,
 //             author: { name: message.author.tag, icon_url: message.author.displayAvatarURL({dynamic: true}) },
-//             description: `${tracks.map((t, i) => `\`${i + 1}.\` [${t.title}](${t.url})`).join('\n')}\n\n${bot.language.SEARCHRESULTS}`,
-//             footer: { text: `${bot.user.username} ©`, icon_url: bot.user.avatarURL() },
+//             description: `${tracks.map((t, i) => `\`${i + 1}.\` [${t.title}](${t.url})`).join('\n')}\n\n${client.language.SEARCHRESULTS}`,
+//             footer: { text: `${client.user.username} ©`, icon_url: client.user.avatarURL() },
 //             timestamp: new Date(),
 //         }],
 //     });
@@ -45,25 +45,25 @@ bot.player.on('trackStart', (queue, track) => { queue.metadata.send(bot.language
 // .on('searchInvalidResponse', (queue, query, tracks, content, collector) => {
 //     if (content === 'cancel') {
 //         collector.stop();
-//         return queue.metadata.send(bot.language.SEARCHINVALIDRESPONSE);
-//     } else queue.metadata.send(bot.language.SEARCHERROR(tracks.length));
+//         return queue.metadata.send(client.language.SEARCHINVALIDRESPONSE);
+//     } else queue.metadata.send(client.language.SEARCHERROR(tracks.length));
 // })
-// .on('searchCancel', (queue, query, tracks) => queue.metadata.send(bot.language.SEARCHCANCEL))
-.on('noResults', (queue, query) => queue.metadata.send(bot.language.NORESULTS(query)))
-.on('queueEnd', (queue) => queue.metadata.send(bot.language.QUEUEEND))
-.on('botDisconnect', (queue) => queue.metadata.send(bot.language.BOTDISCONNECT))
-.on('channelEmpty', (queue) => queue.metadata.send(bot.language.CHANNELEMPTY))
+// .on('searchCancel', (queue, query, tracks) => queue.metadata.send(client.language.SEARCHCANCEL))
+.on('noResults', (queue, query) => queue.metadata.send(client.language.NORESULTS(query)))
+.on('queueEnd', (queue) => queue.metadata.send(client.language.QUEUEEND))
+.on('botDisconnect', (queue) => queue.metadata.send(client.language.BOTDISCONNECT))
+.on('channelEmpty', (queue) => queue.metadata.send(client.language.CHANNELEMPTY))
 .on('connectionError', (queue, error) => { queue.metadata.send(`Error`); console.log(error) })
 .on('error', (queue, error) => {
     switch (error) {
         case 'NotPlaying':
-            queue.metadata.send(bot.language.ERROR[0]);
+            queue.metadata.send(client.language.ERROR[0]);
             break;
         case 'NotConnected':
-            queue.metadata.send(bot.language.PLAY_ERROR[0]);
+            queue.metadata.send(client.language.PLAY_ERROR[0]);
             break;
         case 'UnableToJoin':
-            queue.metadata.send(bot.language.ERROR[1]);
+            queue.metadata.send(client.language.ERROR[1]);
             break;
     };
 })
@@ -82,7 +82,7 @@ fs.readdir("./event/", (err, files) => {
     files.forEach(file => {
         const event = require(`./event/${file}`);
         let eventName = file.split(".")[0];
-        bot.on(eventName, event.bind(null, bot));
+        client.on(eventName, event.bind(null, client));
     });
     console.log("\x1b[32m", `* ${files.length} events loaded.`)
 });
@@ -92,7 +92,7 @@ fs.readdir('./utils/', (err, files) => {
 
     if (err) console.log(err);
     files.forEach((f) => {
-        bot[f.split('.')[0]] = require(`./utils/${f}`);
+        client[f.split('.')[0]] = require(`./utils/${f}`);
     });
     console.log("\x1b[32m", `* ${files.length} utilities loaded.`);
 });
@@ -102,7 +102,7 @@ fs.readdir('./language/', (err, files) => {
 
     if (err) console.log(err);
     files.forEach((f) => {
-        bot[f.split('.')[0]] = require(`./language/${f}`);
+        client[f.split('.')[0]] = require(`./language/${f}`);
     });
     console.log("\x1b[32m", `* ${files.length} languages loaded.`);
 });
@@ -116,9 +116,9 @@ fs.readdir("./command/", (err, files) => {
             if (err) console.log(err);
             file.forEach(f => {
                 const props = require(`./command/${dir}/${f}`);
-                bot.commandes.set(props.conf.name, props);
+                client.commandes.set(props.conf.name, props);
                 props.conf.aliases.forEach(alias => {
-                    bot.aliases.set(alias, props.conf.name);
+                    client.aliases.set(alias, props.conf.name);
                 });
             });
             console.log("\x1b[32m", `* ${dir} category loaded.`)
@@ -126,7 +126,7 @@ fs.readdir("./command/", (err, files) => {
     });
 });
   
-bot.login(bot.config.token);
+client.login(client.config.token);
 
 function sleep(milliseconds) {
     const date = Date.now();

@@ -1,5 +1,5 @@
-module.exports = async (bot) => {
-    console.log(`(!) Ready on ${bot.guilds.cache.size} servers, for a total of ${bot.users.cache.size} users`);
+module.exports = async (client) => {
+    console.log(`(!) Ready on ${client.guilds.cache.size} servers, for a total of ${client.users.cache.size} users`);
 
-    bot.user.setActivity(`${bot.config.prefix}help`);
+    client.user.setActivity(`${client.config.prefix}help`);
 };

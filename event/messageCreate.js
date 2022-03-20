@@ -1,23 +1,23 @@
 const { Collection } = require("discord.js");
 const { findServer } = require("../database/functions");
 
-module.exports = async (bot, message) => {
+module.exports = async (client, message) => {
     if (message.author.bot || message.channel.type === 'dm'){return};
 
-    let prefix = bot.config.prefix;
+    let prefix = client.config.prefix;
     let lang = 'en';
     if(message.guild) {
-        const guild = await findServer(bot, message.guild.id);
-        prefix = guild !== undefined && guild.prefix !== null ? guild.prefix : bot.config.prefix;
+        const guild = await findServer(client, message.guild.id);
+        prefix = guild !== undefined && guild.prefix !== null ? guild.prefix : client.config.prefix;
         lang = guild !== undefined && guild.lang !== null ? guild.lang : 'en'
     };
     
     // LANGUAGE
-    bot.language = require(`../language/${lang}.js`);
+    client.language = require(`../language/${lang}.js`);
 
     // BOT MENTION
-    if(message.content.match(new RegExp(`^<@!?${bot.user.id}>( |)$`))){
-        message.reply(bot.language.BOT_MENTION(prefix))
+    if(message.content.match(new RegExp(`^<@!?${client.user.id}>( |)$`))){
+        message.reply(client.language.BOT_MENTION(prefix))
         return
     }
 
@@ -27,10 +27,10 @@ module.exports = async (bot, message) => {
     const args = message.content.split(' ').slice(1);
     let cmd;
 
-    if (bot.commandes.has(command)){
-        cmd = bot.commandes.get(command)
-    }else if(bot.aliases.has(command)){
-        cmd = bot.commandes.get(bot.aliases.get(command))
+    if (client.commandes.has(command)){
+        cmd = client.commandes.get(command)
+    }else if(client.aliases.has(command)){
+        cmd = client.commandes.get(client.aliases.get(command))
     }
     if(!cmd) return;
     
@@ -50,7 +50,7 @@ module.exports = async (bot, message) => {
         const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
     if (now < expirationTime) {
         const timeLeft = (expirationTime - now) / 1000;
-        return message.reply(bot.language.BOT_COOLDOWN(timeLeft.toFixed(1), props.conf.name));
+        return message.reply(client.language.BOT_COOLDOWN(timeLeft.toFixed(1), props.conf.name));
     }
     }
     timestamps.set(message.author.id, now);
@@ -58,12 +58,12 @@ module.exports = async (bot, message) => {
 
 
     if(props.conf.private === true) { 
-        if(message.author.id !== bot.config.owner) return message.reply(bot.language.PRIVATE_CMD)
+        if(message.author.id !== client.config.owner) return message.reply(client.language.PRIVATE_CMD)
     }
-    // CHARGEMENT DE LA COMMANDE
+    // COMMAND LOADING
     try {
-        cmd.run(bot, message, args);
+        cmd.run(client, message, args);
     } catch (e) {
-        bot.emit("error", e, message);
+        client.emit("error", e, message);
     }
 };

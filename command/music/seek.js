@@ -8,22 +8,22 @@ module.exports={
         aliases: [],
         dir: "music",
     },
-    run: async (bot, message, args) => {
-        if(!message.member.voice.channel) return message.reply(bot.language.PLAY_ERROR[0]);
-        if(message.guild.me.voice.channel && message.member.voice.channel.id !== message.guild.me.voice.channel.id) return message.reply(bot.language.PLAY_ERROR[1]);
+    run: async (client, message, args) => {
+        if(!message.member.voice.channel) return message.reply(client.language.PLAY_ERROR[0]);
+        if(message.guild.me.voice.channel && message.member.voice.channel.id !== message.guild.me.voice.channel.id) return message.reply(client.language.PLAY_ERROR[1]);
         
-        const queue = bot.player.getQueue(message.guild.id);
-        if(!queue || !queue.playing) return message.reply(bot.language.ERROR[0]);
+        const queue = client.player.getQueue(message.guild.id);
+        if(!queue || !queue.playing) return message.reply(client.language.ERROR[0]);
         
-        if(!args[0]) return message.reply(bot.language.WRONG_USAGE(module.exports.conf.usage))
+        if(!args[0]) return message.reply(client.language.WRONG_USAGE(module.exports.conf.usage))
         const time = ms(args.join(' '));
-        if(time >= queue.current.durationMS) return message.reply(bot.language.SEEK_ERR[1])
+        if(time >= queue.current.durationMS) return message.reply(client.language.SEEK_ERR[1])
 
         try {
             await queue.seek(time)
-            message.reply(bot.language.SEEK_SUCCESS(ms(time, { long: true })))
+            message.reply(client.language.SEEK_SUCCESS(ms(time, { long: true })))
         } catch(e) {
-            message.reply(bot.language.SEEK_ERR[1])
+            message.reply(client.language.SEEK_ERR[1])
         }
     }
 };

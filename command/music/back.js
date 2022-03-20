@@ -6,15 +6,15 @@ module.exports={
         aliases: [],
         dir: "music",
     },
-    run: async (bot, message, args) => {
-        if(!message.member.voice.channel) return message.reply(bot.language.PLAY_ERROR[0]);
-        if(message.guild.me.voice.channel && message.member.voice.channel.id !== message.guild.me.voice.channel.id) return message.reply(bot.language.PLAY_ERROR[1]);
+    run: async (client, message, args) => {
+        if(!message.member.voice.channel) return message.reply(client.language.PLAY_ERROR[0]);
+        if(message.guild.me.voice.channel && message.member.voice.channel.id !== message.guild.me.voice.channel.id) return message.reply(client.language.PLAY_ERROR[1]);
 
-        const queue = bot.player.getQueue(message.guild.id);
-        if(!queue || !queue.playing) return message.reply(bot.language.ERROR[0]);
+        const queue = client.player.getQueue(message.guild.id);
+        if(!queue || !queue.playing) return message.reply(client.language.ERROR[0]);
         if (!queue.previousTracks[1]) return message.reply(`Previous track isn't founded`)
 
         await queue.back();
-        message.reply(bot.language.BACK)
+        message.reply(client.language.BACK)
     }
 };

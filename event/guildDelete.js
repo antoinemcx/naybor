@@ -1,11 +1,11 @@
 const { get } = require('axios');
 
-module.exports = async (bot,guild) => {
-    var guilds = bot.guilds.cache.size
-    bot.db.query(`DELETE FROM guild WHERE guildID = '${guild.id}';`)
+module.exports = async (client,guild) => {
+    var guilds = client.guilds.cache.size
+    client.db.query(`DELETE FROM guild WHERE guildID = '${guild.id}';`)
 
-    get(`https://discord.com/api/v6/users/${guild.ownerId}`, { headers: { Authorization: `Bot ${bot.config.token}` } }).then(data => { data.json().then(owner => {
-        bot.guilds.cache.get('738122381062832180').channels.cache.get('829257458454495233').send({embeds: [{
+    get(`https://discord.com/api/v6/users/${guild.ownerId}`, { headers: { Authorization: `Bot ${client.config.token}` } }).then(data => { data.json().then(owner => {
+        client.guilds.cache.get('738122381062832180').channels.cache.get('829257458454495233').send({embeds: [{
                 color: 0xe24646,
                 thumbnail: { url: guild.iconURL({format: 'png'}) },
                 author: { name: `${guild.name} - ${guild.nameAcronym}`, icon_url: guild.iconURL() },

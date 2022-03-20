@@ -10,7 +10,7 @@ module.exports = {
         private: true,
         cooldown: 3
     },
-    run: (bot, message, args) => {
+    run: (client, message, args) => {
         let code = args.join(' ');
         try {
             let ev = eval(code)
@@ -18,7 +18,7 @@ module.exports = {
                 depth: 1
             })
 
-            str = `${str.replace(new RegExp(`${bot.token}`, "g"), "nop?")}`;
+            str = `${str.replace(new RegExp(`${client.token}`, "g"), "nop?")}`;
             if(str.length > 1900) {
                 str = str.substr(0, 1900)
                 str = str + "..."
@@ -27,20 +27,20 @@ module.exports = {
             message.react('832595223564779541');
             message.reply({embeds: [{
                 author: { name: message.author.tag, icon_url: message.author.displayAvatarURL({dynamic: true}) },
-                color: bot.color.messagecolor.greyple,
+                color: client.color.messagecolor.greyple,
                 description: `\`\`\`JS\n${str}\`\`\``,
                 timestamp: new Date(),
-                footer: { text: bot.user.username, icon_url: bot.user.avatarURL() }
+                footer: { text: client.user.username, icon_url: client.user.avatarURL() }
             }]})
             
         } catch (err) {
             message.react('832595223602659379');
             message.reply({embeds: [{
                 author: { name: message.author.tag, icon_url: message.author.displayAvatarURL({dynamic: true}) },
-                color: bot.color.messagecolor.red,
+                color: client.color.messagecolor.red,
                 description: `\`\`\`JS\n${err}\`\`\``,
                 timestamp: new Date(),
-                footer: { text: bot.user.username, icon_url: bot.user.avatarURL() }
+                footer: { text: client.user.username, icon_url: client.user.avatarURL() }
             }]})
         }
     }

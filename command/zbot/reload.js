@@ -8,26 +8,26 @@ module.exports={
         private: true,
         cooldown: 3
     },
-    run: (bot, message, args) => {
-        if(!args[0]) return message.reply(bot.language.WRONG_USAGE(module.exports.conf.usage))
+    run: (client, message, args) => {
+        if(!args[0]) return message.reply(client.language.WRONG_USAGE(module.exports.conf.usage))
 
         let cmddb;
-        if (bot.commandes.has(args[0])){
-            cmddb = bot.commandes.get(args[0])
-        }else if(bot.aliases.has(args[0])){
-            cmddb = bot.commandes.get(bot.aliases.get(args[0]))
+        if (client.commandes.has(args[0])){
+            cmddb = client.commandes.get(args[0])
+        }else if(client.aliases.has(args[0])){
+            cmddb = client.commandes.get(client.aliases.get(args[0]))
         }
-        if(!cmddb) return message.reply(`${bot.emotes.x} Je ne trouve pas \`${args[0].toUpperCase()}\``)
+        if(!cmddb) return message.reply(`${client.emotes.x} Je ne trouve pas \`${args[0].toUpperCase()}\``)
 
             const dir = cmddb.conf.dir
             delete require.cache[require.resolve(`../../command/${dir}/${cmddb.conf.name}`)];
-            bot.commandes.delete(args[0]);
+            client.commandes.delete(args[0]);
             const props = require(`../../command/${dir}/${cmddb.conf.name}`);
-            bot.commandes.set(props.conf.name, props);
+            client.commandes.set(props.conf.name, props);
 
             if(props.conf.aliases) {
                 props.conf.aliases.forEach(alias => {
-                    bot.aliases.set(alias, props.conf.name);
+                    client.aliases.set(alias, props.conf.name);
                 });
             }
             message.react("✅")
