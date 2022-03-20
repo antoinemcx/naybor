@@ -9,7 +9,7 @@ const db = mariadb.createPool({
      connectionLimit: 5
 })
 
-db.getConnection().then(() => console.log("MariaDB connected")).catch(err => {
+db.getConnection().then(() => { console.log(" "); console.log(`(!) MariaDB connected`) }).catch(err => {
       console.log(err)
     });
 

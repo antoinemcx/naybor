@@ -17,7 +17,6 @@ bot.aliases = new Collection();
 cooldowns = new Collection();
 
 //SET UTILS
-bot.logger = require('./utils/logger');
 bot.color = require('./utils/color.js');
 bot.db = require('./database/db');
 bot.player = new Player(bot);
@@ -69,55 +68,70 @@ bot.player.on('trackStart', (queue, track) => { queue.metadata.send(bot.language
     };
 })
 
-//LOADER ALL FILE AND COMMANDS
-fs.readdir("./command/", (err, files) => {
-    if (err) bot.logger.error(err);
-    files.forEach(dir => {
-      fs.readdir('./command/'+ dir +'/', (err, file) => {
-        if (err) bot.logger.error(err);
-        bot.logger.loader(`${bot.color.chalkcolor.magenta('[CATEGORY] ')} ${bot.color.chalkcolor.blue(`${dir}`)} loading...`);
-        file.forEach(f => {
-          const props = require(`./command/${dir}/${f}`);
-          bot.logger.loader(`[COMMANDE] ${bot.color.chalkcolor.cyanBright(`${f}`)} is load`);
-          bot.commandes.set(props.conf.name, props);
-          props.conf.aliases.forEach(alias => {
-            bot.aliases.set(alias, props.conf.name);
-          });
-        });
-        bot.logger.loader(`${bot.color.chalkcolor.magenta('[CATEGORY]')} ${bot.color.chalkcolor.red('[FINISH]')} ${bot.color.chalkcolor.blue(`${dir}`)} is load`)
-      })
-    });
-  });
+// ==================== LOADER ==================== //
+console.clear();
+console.log('\x1b[36m%s\x1b[0m', "Naybor is loading, please wait...")
+console.log(' ')
+sleep(1050)
+console.clear();
 
-  //LOADER ALL EVENT
- fs.readdir("./event/", (err, files) => {
-    if (err) bot.logger.error(err);
+fs.readdir("./event/", (err, files) => {
+    sleep(500);
+
+    if (err) console.log(err);
     files.forEach(file => {
-      const event = require(`./event/${file}`);
-      let eventName = file.split(".")[0];
-      bot.logger.loader(`[EVENT] ${bot.color.chalkcolor.green(`${eventName}.js`)} is load`);
-      bot.on(eventName, event.bind(null, bot));
+        const event = require(`./event/${file}`);
+        let eventName = file.split(".")[0];
+        bot.on(eventName, event.bind(null, bot));
     });
-    bot.logger.loader(`[EVENT] ${bot.color.chalkcolor.red('[FINISH]')} ${files.length} events loaded`)
-  });
- 
- //LOADER ALL UTILS FILES
-  fs.readdir('./utils/', (err, files) => {
-    if (err) bot.logger.error(err);
-    files.forEach((f) => {
-      bot.logger.loader(`[UTILS] ${bot.color.chalkcolor.green(f)} is load`);
-      bot[f.split('.')[0]] = require(`./utils/${f}`);
-    });
-    bot.logger.loader(`[UTILS] ${bot.color.chalkcolor.red('[FINISH]')} ${files.length} utilities loaded`);
-  });
+    console.log("\x1b[32m", `* ${files.length} events loaded.`)
+});
 
-  fs.readdir('./language/', (err, files) => {
-    if (err) bot.logger.error(err);
+fs.readdir('./utils/', (err, files) => {
+    sleep(500);
+
+    if (err) console.log(err);
     files.forEach((f) => {
-      bot.logger.loader(`[LANG] ${bot.color.chalkcolor.green(f)} is load`);
-      bot[f.split('.')[0]] = require(`./language/${f}`);
+        bot[f.split('.')[0]] = require(`./utils/${f}`);
     });
-    bot.logger.loader(`[LANG] ${bot.color.chalkcolor.red('[FINISH]')} ${files.length} languages loaded`);
-  });
+    console.log("\x1b[32m", `* ${files.length} utilities loaded.`);
+});
+
+fs.readdir('./language/', (err, files) => {
+    sleep(500);
+
+    if (err) console.log(err);
+    files.forEach((f) => {
+        bot[f.split('.')[0]] = require(`./language/${f}`);
+    });
+    console.log("\x1b[32m", `* ${files.length} languages loaded.`);
+});
+
+fs.readdir("./command/", (err, files) => {
+    sleep(500);
+
+    if (err) console.log(err);
+    files.forEach(dir => {
+        fs.readdir('./command/'+ dir +'/', (err, file) => {
+            if (err) console.log(err);
+            file.forEach(f => {
+                const props = require(`./command/${dir}/${f}`);
+                bot.commandes.set(props.conf.name, props);
+                props.conf.aliases.forEach(alias => {
+                    bot.aliases.set(alias, props.conf.name);
+                });
+            });
+            console.log("\x1b[32m", `* ${dir} category loaded.`)
+        })
+    });
+});
   
 bot.login(bot.config.token);
+
+function sleep(milliseconds) {
+    const date = Date.now();
+    let currentDate = null;
+    do {
+        currentDate = Date.now();
+    } while (currentDate - date < milliseconds);
+}

@@ -1,36 +1,3 @@
-const {ChalkError} = require('./CustomError');
-const chalk = require('chalk');
-let chalkcolor ={
-     red(message){
-        if(!message) throw new ChalkError('Not text found !');
-        return chalk.red(message)
-    },
-    black(message){
-        if(!message) throw new ChalkError('Not text found !');
-        return chalk.black(message)
-    },
-    green(message){
-        if(!message) throw new ChalkError('Not text found !');
-        return chalk.green(message)
-    },
-    yellow(message){
-         if(!message) throw new ChalkError('Not text found !');
-        return chalk.yellow(message)
-    },
-    magenta(message){
-         if(!message) throw new ChalkError('Not text found !');
-        return chalk.magenta(message)
-    },
-    blue(message){
-         if(!message) throw new ChalkError('Not text found !');
-        return chalk.blue(message)
-    },
-    cyanBright(message){
-        if(!message) throw new ChalkError('Not text found !');
-        return chalk.cyanBright(message)
-    },
-};
-
 let messagecolor={
     red : 0xF52E2E,
     yellow: 0xF5F52E,
@@ -49,7 +16,4 @@ let messagecolor={
 };
 
 
-module.exports= {
-    chalkcolor,
-    messagecolor
-};
+module.exports = { messagecolor };
