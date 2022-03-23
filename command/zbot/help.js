@@ -37,7 +37,7 @@ module.exports={
                         value: commands.map((command) => `\`${command.conf.name}\``).join(', '),
                     };
                 }),
-                footer: { text: `${client.user.username} ©` },
+                footer: { text: `${client.user.username} © https://github.com/meliooff/naybor` },
                 timestamp: new Date()
             }]})
 
