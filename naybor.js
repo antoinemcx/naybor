@@ -1,10 +1,7 @@
 const { Client, Collection } = require("discord.js");
 const client = new Client({
     intents: ["GUILDS", "GUILD_MEMBERS", "GUILD_MESSAGES", "GUILD_MESSAGE_REACTIONS", "DIRECT_MESSAGES", "GUILD_VOICE_STATES"],
-    allowedMentions: {
-        parse: ['users', 'roles'],
-        repliedUser: false
-    },
+    allowedMentions: { parse: ['users', 'roles'], repliedUser: false },
 });
 module.exports = client;
 
@@ -135,3 +132,6 @@ function sleep(milliseconds) {
         currentDate = Date.now();
     } while (currentDate - date < milliseconds);
 }
+
+
+// Made with ❤️ by meliooff (https://github.com/meliooff)
