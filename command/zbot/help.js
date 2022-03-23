@@ -24,7 +24,7 @@ module.exports={
                 if (!categorie.includes(c.conf.dir)) {await categorie.push(c.conf.dir)}
             });
 
-            message.reply({embeds: [{ // [text](link) ● [text](link)..
+            message.reply({embeds: [{
                 color: client.color.messagecolor.greyple,
                 author: { name: client.language.HELP(client.user.username), icon_url: client.user.avatarURL(), url: `https://github.com/meliooff/naybor` },
                 thumbnail: { url: client.user.avatarURL({size: 1024}) },

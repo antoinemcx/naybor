@@ -1,7 +1,9 @@
 # Naybor [![Stars](https://img.shields.io/github/stars/meliooff/naybor)](https://github.com/meliooff/naybor) [![Support Server](https://img.shields.io/discord/738122381062832180.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2)](https://discord.gg/G6WQsMQShZ)
 
 Naybor is an open-source music discord bot currently available in English and French ; if you like the project, feel free to put a ⭐ !
-If you need help or anything, join the [server support](https://discord.gg/G6WQsMQShZ).
+If you need help or anything, join the [server support](https://discord.gg/G6WQsMQShZ).   
+   
+Main features : music, configuration, multilingual, cooldowns, advanced & automatic help page, easy & ready to use, ...
 
 # Configuration
 

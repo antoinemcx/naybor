@@ -81,7 +81,7 @@ module.exports = {
 
 
     // BOTINFO COMMAND
-    BOTINFO_DESCRIPTION: (bot) => `**${bot}** est un bot discord de musique actuellement en développement.
+    BOTINFO_DESCRIPTION: (bot) => `**${bot}** est un bot discord de musique [open-source](https://github.com/meliooff/naybor).
 Avec l'aide de quelques traducteurs humains, ${bot} est disponible en 2 langues, au moins pour le moment : anglais et français.`,
     BOTINFO: [ 'Développeur', 'Contributeurs', 'Serveurs', 'serveurs', 'Salons', 'Statistiques', 'Connecté dans', 'Commandes', 'Système', 'Platform' ],
 
