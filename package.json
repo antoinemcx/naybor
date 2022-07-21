@@ -5,7 +5,8 @@
   "version": "1.0.0",
   "description": "Complete discord music bot (multilingual, configurable and much more) using discord-player notably.",
   "scripts": {
-    "start": "node naybor.js"
+    "start": "node naybor.js",
+    "migration": "node utils/migration.js"
   },
   "dependencies": {
     "@discordjs/opus": "^0.7.0",
