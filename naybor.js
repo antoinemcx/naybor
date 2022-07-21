@@ -89,6 +89,7 @@ fs.readdir('./utils/', (err, files) => {
 
     if (err) console.log(err);
     files.forEach((f) => {
+        if (f === 'migration.js') return;
         client[f.split('.')[0]] = require(`./utils/${f}`);
     });
     console.log("\x1b[32m", `* ${files.length} utilities loaded.`);
