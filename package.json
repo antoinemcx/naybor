@@ -2,7 +2,7 @@
   "name": "naybor",
   "main": "naybor.js",
   "author": "meliooff",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Complete discord music bot (multilingual, configurable and much more) using discord-player notably.",
   "scripts": {
     "start": "node naybor.js"
