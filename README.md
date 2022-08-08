@@ -34,6 +34,13 @@ module.exports = {
 **Start the bot**  
 > `node naybor.js`
 
+# MariaDB
+
+Naybor runs on the MariaDB database, a slightly modified version of MySQL.  
+Here is the "**guild**" table to create to ensure the proper functioning of the bot :  
+  
+[![guild table](https://i.imgur.com/4D971G4.png)](https://discord.gg/G6WQsMQShZ)
+
 # More information
 
 FFMPEG and NodeJS (version 16 or later) are required to run the bot properly.  
