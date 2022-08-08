@@ -10,7 +10,7 @@ module.exports={
     },
     run: async (client, message, args) => {
         if (!message.member.voice.channel) return message.reply(client.language.PLAY_ERROR[0]);
-        if (message.guild.me.voice.channel && message.member.voice.channel.id !== message.guild.me.voice.channel.id) return message.reply(client.language.PLAY_ERROR[1]);
+        if (message.guild.members.me.voice.channel && message.member.voice.channel.id !== message.guild.members.me.voice.channel.id) return message.reply(client.language.PLAY_ERROR[1]);
 
         if (!args[0]) return message.reply(client.language.WRONG_USAGE(module.exports.conf.usage));
 

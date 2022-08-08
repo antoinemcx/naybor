@@ -8,10 +8,10 @@
     "start": "node naybor.js"
   },
   "dependencies": {
-    "@discordjs/opus": "^0.7.0",
     "axios": "^0.26.1",
     "discord-player": "^5.2.2",
-    "discord.js": "^13.6.0",
+    "discord.js": "^14.1.2",
+    "ffmpeg-static": "^5.0.2",
     "lyrics-finder": "^21.4.0",
     "mariadb": "^2.5.2",
     "ms": "^2.1.3",
