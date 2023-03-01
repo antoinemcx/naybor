@@ -9,7 +9,7 @@ module.exports = async (client,guild) => {
             client.guilds.cache.get(client.config.serverID).channels.cache.get(client.config.logChannel).send({embeds: [{
                 color: 0xe24646,
                 thumbnail: { url: guild.iconURL({format: 'png'}) },
-                author: { name: `I didn't find data on the server`, icon_url: guild.iconURL(), url: `https://github.com/meliooff/naybor` },
+                author: { name: `I didn't find data on the server`, icon_url: guild.iconURL(), url: `https://github.com/antoinemcx/naybor` },
                 description: `Someone kicked me out of his/her server.\nI'm now on **${guilds}** servers..`,
                 footer: { text: `ID : ${guild.id}` },
                 timestamp: new Date(),
@@ -20,7 +20,7 @@ module.exports = async (client,guild) => {
             client.guilds.cache.get(client.config.serverID).channels.cache.get(client.config.logChannel).send({embeds: [{
                     color: 0xe24646,
                     thumbnail: { url: guild.iconURL({format: 'png'}) },
-                    author: { name: `${guild.name} - ${guild.nameAcronym}`, icon_url: guild.iconURL(), url: `https://github.com/meliooff/naybor` },
+                    author: { name: `${guild.name} - ${guild.nameAcronym}`, icon_url: guild.iconURL(), url: `https://github.com/antoinemcx/naybor` },
                     description: `\`${owner.username}#${owner.discriminator}\` kicked me out of his/her server with **${guild.memberCount}** members.\nI'm now on **${guilds}** servers..`,
                     footer: { text: `ID : ${guild.id}` },
                     timestamp: new Date(),

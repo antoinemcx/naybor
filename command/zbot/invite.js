@@ -12,7 +12,7 @@ module.exports={
 
         message.reply({embeds: [{
             color: client.color.messagecolor.greyple,
-            author: { name: message.author.tag, icon_url: message.author.displayAvatarURL({dynamic: true}), url: `https://github.com/meliooff/naybor` },
+            author: { name: message.author.tag, icon_url: message.author.displayAvatarURL({dynamic: true}), url: `https://github.com/antoinemcx/naybor` },
             thumbnail: { url: client.user.avatarURL() },
             fields: [{
                     name: client.language.INVITE[0],

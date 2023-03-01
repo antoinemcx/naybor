@@ -31,7 +31,7 @@ module.exports={
 
         return message.reply({embeds: [{
             color: client.color.messagecolor.greyple,
-            author: { name: `${client.language.LYRICS[1]} ${track.title}`, icon_url: message.author.displayAvatarURL({dynamic: true}), url: `https://github.com/meliooff/naybor` },
+            author: { name: `${client.language.LYRICS[1]} ${track.title}`, icon_url: message.author.displayAvatarURL({dynamic: true}), url: `https://github.com/antoinemcx/naybor` },
             description: lyrics,
             footer: { text: `${client.user.username} ©`, icon_url: client.user.avatarURL() },
             timestamp: new Date()

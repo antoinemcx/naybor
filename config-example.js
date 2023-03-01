@@ -32,4 +32,4 @@ module.exports = {
 };
 
 
-// Made with ❤️ by meliooff (https://github.com/meliooff)
+// Made with ❤️ by meliooff (https://github.com/antoinemcx)

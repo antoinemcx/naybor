@@ -19,7 +19,7 @@ module.exports={
 
         message.reply({embeds: [{
             color: client.color.messagecolor.greyple,
-            author: { name: `${client.language.QUEUE[0]} ${message.guild.name}${queue.loopMode ? ' (looped)' : ''}`, icon_url: message.author.displayAvatarURL({dynamic: true}), url: `https://github.com/meliooff/naybor` },
+            author: { name: `${client.language.QUEUE[0]} ${message.guild.name}${queue.loopMode ? ' (looped)' : ''}`, icon_url: message.author.displayAvatarURL({dynamic: true}), url: `https://github.com/antoinemcx/naybor` },
             description: `${client.language.QUEUE[1]} : [${queue.current.title}](${queue.current.url}) » \`${client.language.QUEUE[2]} : ${queue.current.requestedBy.username}\`\n\n${list}`,
             footer: { text: `${queue.tracks.length} ${client.language.QUEUE[3]}${queue.tracks.length > 1 ? 's' : ''} ${client.language.QUEUE[4]}` },
             timestamp: new Date()            

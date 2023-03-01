@@ -18,7 +18,7 @@ module.exports={
         message.channel.send({
             embeds: [{
                 color: client.color.messagecolor.greyple,
-                author: { name: message.author.tag, icon_url: message.author.displayAvatarURL({dynamic: true}), url: `https://github.com/meliooff/naybor` },
+                author: { name: message.author.tag, icon_url: message.author.displayAvatarURL({dynamic: true}), url: `https://github.com/antoinemcx/naybor` },
                 description: `[${track.title}](${track.url}) (\`${perc.progress === 'Infinity' ? 'Live' : `${perc.progress}%`}\`)\n\n${client.language.NOWPLAYING[0]} » \`${track.author}\`\n${client.language.NOWPLAYING[1]} » \`${track.duration}\`\nType » \`${track.fromPlaylist ? client.language.NOWPLAYING[2] : client.language.NOWPLAYING[3]}\`
 \n${client.language.NOWPLAYING[4]} » \`${track.requestedBy.username}#${track.requestedBy.discriminator}\`\nVolume » \`${queue.volume}%\`\nLoop » ${queue.repeatMode ? client.emotes.v : client.emotes.x}\nPause » ${queue.paused ? client.emotes.v : client.emotes.x}`,
                 fields: [

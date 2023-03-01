@@ -8,7 +8,7 @@ module.exports = async (client,guild) => {
         client.guilds.cache.get(client.config.serverID).channels.cache.get(client.config.logChannel).send({embeds: [{
             color: client.color.messagecolor.green,
             thumbnail: { url: guild.iconURL({format: 'png', size: 1024}) },
-            author: { name: `${guild.name} - ${guild.nameAcronym}`, icon_url: guild.iconURL(), url: `https://github.com/meliooff/naybor` },
+            author: { name: `${guild.name} - ${guild.nameAcronym}`, icon_url: guild.iconURL(), url: `https://github.com/antoinemcx/naybor` },
             description: `\`${owner.username}#${owner.discriminator}\` added me to his/her server with **${guild.memberCount}** members, we thank him/her !\nI'm now on **${guilds}** servers..`,
             footer: { text: `ID : ${guild.id}` },
             timestamp: new Date(),
