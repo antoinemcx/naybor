@@ -5,7 +5,7 @@ If you like the project, feel free to put a ⭐ ; If you need help or anything, 
 
 Main features : music, configurable, multilingual, cooldowns, automatic help page, easy & ready to use, ...
 
-# Configuration
+## Configuration
 
 For the configuration, rename the `config-example.js` file to `config.js` and replace the :
 ```js
@@ -26,21 +26,31 @@ module.exports = {
 };
 ```
 
-# Commands
+## Commands
 
-#### Installation
-> `npm install`
+### Installation
 
-#### Start the bot
-> `npm run start`
+```sh
+$ npm install
+```
+
+### Start the bot
+
+```sh
+$ npm run start
+```
 
 # MariaDB
 
 Naybor runs on the MariaDB database, a slightly modified version of MySQL.<br>
-First, create the database. The name of the database must be the same as the one set in the `config.js` file
-![](https://i.imgur.com/4KH5vSy.png)
-To create the table, run the following command :
-> `npm run migration`
+First, create the database. The name of the database must be the same as the one set in the `config.js` file  
+![](https://i.imgur.com/ALeKvsf.png)
+
+To create the table, run the following command (after creating the database of course) :
+
+```sh
+$ npm run migration
+```
 
 Then, [run the bot](#start-the-bot).
 
