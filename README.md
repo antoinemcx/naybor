@@ -1,8 +1,8 @@
 # Naybor [![Stars](https://img.shields.io/github/stars/meliooff/naybor)](https://github.com/meliooff/naybor) [![Support Server](https://img.shields.io/discord/738122381062832180.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2)](https://discord.gg/G6WQsMQShZ)
 
 Naybor is an open-source music discord bot currently available in English and French.   
-If you like the project, feel free to put a ⭐ ; If you need help or anything, join the [server support](https://discord.gg/G6WQsMQShZ).   
-   
+If you like the project, feel free to put a ⭐ ; If you need help or anything, join the [server support](https://discord.gg/G6WQsMQShZ).
+
 Main features : music, configurable, multilingual, cooldowns, automatic help page, easy & ready to use, ...
 
 # Configuration
@@ -28,18 +28,21 @@ module.exports = {
 
 # Commands
 
-**Installation**
+#### Installation
 > `npm install`
 
-**Start the bot**  
-> `node naybor.js`
+#### Start the bot
+> `npm run start`
 
 # MariaDB
 
-Naybor runs on the MariaDB database, a slightly modified version of MySQL.  
-Here is the "**guild**" table to create to ensure the proper functioning of the bot :  
-  
-[![guild table](https://i.imgur.com/4D971G4.png)](https://discord.gg/G6WQsMQShZ)
+Naybor runs on the MariaDB database, a slightly modified version of MySQL.<br>
+First, create the database. The name of the database must be the same as the one set in the `config.js` file
+![](https://i.imgur.com/4KH5vSy.png)
+To create the table, run the following command :
+> `npm run migration`
+
+Then, [run the bot](#start-the-bot).
 
 # More information
 
