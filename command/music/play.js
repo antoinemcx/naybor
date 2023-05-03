@@ -40,6 +40,7 @@ module.exports={
                 }
             });
         } catch (e) {
+            console.log(e);
             return message.channel.send(client.language.ERROR[1]);
         }
     }
