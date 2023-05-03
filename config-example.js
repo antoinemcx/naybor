@@ -28,7 +28,7 @@ module.exports = {
         volume: `🔉`
     },
 
-    filters: ['8D', 'gate', 'haas', 'phaser', 'treble', 'tremolo', 'vibrato', 'reverse', 'karaoke', 'flanger', 'mcompand', 'pulsator', 'subboost', 'bassboost', 'vaporwave', 'nightcore', 'normalizer', 'surrounding'],
+    filters: ['Flat', 'Classical', 'Club', 'Dance', 'FullBass', 'FullBassTreble', 'Headphones', 'LargeHall', 'Live', 'Party', 'Pop', 'Reggae', 'Rock', 'Ska', 'Soft', 'SoftRock', 'Techno'],
 };
 
 
