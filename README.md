@@ -37,7 +37,7 @@ $ npm install
 ### Start the bot
 
 ```sh
-$ npm run start
+$ npm start
 ```
 
 ## MariaDB
