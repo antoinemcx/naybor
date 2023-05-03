@@ -95,6 +95,12 @@ Avec l'aide de quelques traducteurs humains, ${bot} est disponible en 2 langues,
     REMOVE_SUCCESS: (song) => `${emotes.v} La musique **${song}** a bien été retiré de la file d'attente`,
 
 
+    // SKIPTO COMMAND
+    SKIPTO_ERR: [ `${emotes.x} Pour passer à une autre musique de la file d'attente, celle-ci doit contenir au moins **3** pistes.`,
+    `${emotes.x} Veuillez saisir une position valide dans la file d'attente (utilisez la commande \`queue\` pour en chercher une).` ],
+    SKIPTO_SUCCESS: (song) => `${emotes.v} La musique a été correctement passée au numéro **${song}** de la file.`,
+
+
     // SEEK COMMAND
     SEEK_ERR: [ `${emotes.x} Veuillez indiquer un temps correct (en secondes)`,
     `${emotes.x} Une erreur est survenue, le temps saisi est incorrect.\nVérifiez que vous avez indiquer un temps en secondes inférieur à la durée de la musique` ],

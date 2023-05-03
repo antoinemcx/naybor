@@ -95,6 +95,12 @@ With the help of some human translators, ${bot} is available in 2 languages, at 
     REMOVE_SUCCESS: (song) => `${emotes.v} The music number **${song}** has been corectly removed from the queue`,
 
 
+    // SKIPTO COMMAND
+    SKIPTO_ERR: [ `${emotes.x} To skip to another track of the queue, there must be at least **3** tracks in it`,
+    `${emotes.x} Please, enter a valid position in the queue (use the \`queue\` command to search a position)` ],
+    SKIPTO_SUCCESS: (song) => `${emotes.v} The music has correctly been skipped correctly to the number **${song}**.`,
+
+
     // SEEK COMMAND
     SEEK_ERR: [ `${emotes.x} Please enter a correct time (in seconds)`,
     `${emotes.x} An error has occurred, the time entered is incorrect.\nVerify that you have entered a time in seconds that is less than the duration of the music` ],
