@@ -9,17 +9,14 @@ module.exports = {
 
 
     // DISCORD-PLAYER MESSAGES
-    TRACKSTART: (title, channel) => `${emotes.music} En train de jouer \`${title}\` dans le salon **${channel.name}**`,
+    TRACKSTART: (title, channelID) => `${emotes.music} En train de jouer \`${title}\` dans le salon <#${channelID}>`,
     TRACKADD: (track) => `${emotes.musiccd} \`${track.title}\` a bien été ajouté à la file d'attente (**${track.duration}**)`,
     PLAYLISTADD: (playlist) => `${emotes.music} \`${playlist.title}\` a été ajouté à la file d'attente (**${playlist.tracks.length}** songs)`,
     SEARCHRESULTS: `Entrez le numéro de la musique que vous souhaitez écouter. Ou \`cancel\` pour quitter.`,
     SEARCHINVALIDRESPONSE: `${emotes.v} La recherche a bien été annulé`,
     SEARCHERROR: (length) => `${emotes.x} Le numéro entré n'est pas dans la liste.\nVous devez entrer un nombre entre 1 et **${length}**`,
     SEARCHCANCEL: `${emotes.v} Vous n'avez pas entré de réponse, s'il vous plaît, entrez la commande de nouveau`,
-    NORESULTS: (query) => `${emotes.x} Je n'ai pas trouvé de résultats pour \`${query}\`.\nIl est possible que vous ayez entré un lien invalide, ou qu'il y ait trop de musiques dans votre playlist (max 100)`,
-    QUEUEEND: `${emotes.x} La musique s'est arrêtée car il n'y a plus de musique dans la file d'attente`,
     CHANNELEMPTY: `${emotes.x} La musique s'est arrêtée car il n'y a plus personne dans le salon vocal`,
-    BOTDISCONNECT: `${emotes.x} La musique s'est arrêtée car j'ai été déconnecté du salon vocal`,
     ERROR: [ `${emotes.x} Il n'y a aucune musique en cours.`, `${emotes.x} Je ne peux pas rejoindre le salon vocal, veuillez vérifier mes permissions`,
     `${emotes.x} Une erreur a eu lieu. Si l'erreur persiste, veuillez contacter le serveur de support.` ],
 
@@ -36,6 +33,7 @@ module.exports = {
     INVITE: [ `Permissions administrateur`, `Permissions de membre`, `Clique ici` ],
     LYRICS: [ `Aucune parole trouvée pour`, `Paroles de` ],
     BACK: `${emotes.v} La musique précédente est en cours`,
+    PLAYNEXT: (track) => `${emotes.musiccd} \`${track.title}\` a bien été ajouté en première position (**${track.duration}**)`,
 
 
 

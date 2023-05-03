@@ -15,15 +15,16 @@ module.exports={
         if (!args[0]) return message.reply(client.language.WRONG_USAGE(module.exports.conf.usage));
 
         const player = client.player;
-        const queue = player.getQueue(message.guild.id);
-        if(!queue || !queue.playing) return message.channel.send(client.language.ERROR[0]);
+        const queue = player.nodes.get(message.guild.id);
+        if(!queue || !queue.node.isPlaying()) return message.channel.send(client.language.ERROR[0]);
 
-        const song = await player.search(args.join(" "), {
+        const searchResult = await player.search(args.join(" "), {
             requestedBy: message.author,
             searchEngine: QueryType.AUTO
         });
-        if(!song || !song.tracks.length) return message.reply(client.language.PLAY_ERR[2])
+        if(!searchResult || !searchResult.hasTracks()) return message.reply(client.language.PLAY_ERR[2])
 
-        queue.insert(song.tracks[0]);
+        await queue.insertTrack(searchResult.tracks[0]);
+        await message.reply(client.language.PLAYNEXT(searchResult.tracks[0]));
     }
 };

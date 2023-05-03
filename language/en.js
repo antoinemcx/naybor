@@ -9,17 +9,14 @@ module.exports = {
 
 
     // DISCORD-PLAYER MESSAGES
-    TRACKSTART: (title, channel) => `${emotes.music} Playing \`${title}\` into **${channel.name}**`,
+    TRACKSTART: (title, channelID) => `${emotes.music} Playing \`${title}\` into <#${channelID}>`,
     TRACKADD: (track) => `${emotes.musiccd} \`${track.title}\` has been correctly added to the queue (**${track.duration}**)`,
     PLAYLISTADD: (playlist) => `${emotes.music} \`${playlist.title}\` added to the queue (**${playlist.tracks.length}** songs)`,
     SEARCHRESULTS: `Type the number of the music you want to listen to. Or \`cancel\` to exit.`,
     SEARCHINVALIDRESPONSE: `${emotes.v} Search successfully canceled`,
     SEARCHERROR: (length) => `${emotes.x} The number sent is not in the list.\nYou have to send a valid number between 1 and **${length}**`,
     SEARCHCANCEL: `${emotes.v} You did not indicate an answer, please resend the command`,
-    NORESULTS: (query) => `${emotes.x} I didn't find any results for \`${query}\`.\nIt's possible that you have given an invalid link or that there are too many musics in a playlist (max 100)`,
-    QUEUEEND: `${emotes.x} The music has stopped because there is no more music in the queue`,
     CHANNELEMPTY: `${emotes.x} The music has stopped because there is no more member in the voice channel`,
-    BOTDISCONNECT: `${emotes.x} The music has stopped because i've been disconnected from the channel`,
     ERROR: [ `${emotes.x} There is no music playing`, `${emotes.x} I cannot join your voice channel, please check my permissions`,
     `${emotes.x} An error has occurred. If the error remains, please contact my support server` ],
 
@@ -36,6 +33,7 @@ module.exports = {
     INVITE: [ `Administrator permissions`, `Member permissions`, `Click here` ],
     LYRICS: [ `No lyrics found for`, `Lyrics of` ],
     BACK: `${emotes.v} The previous music is playing`,
+    PLAYNEXT: (track) => `${emotes.musiccd} \`${track.title}\` has been correctly added in first position (**${track.duration}**)`,
     
 
 

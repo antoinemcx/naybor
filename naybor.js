@@ -17,51 +17,37 @@ cooldowns = new Collection();
 //SET UTILS
 client.color = require('./utils/color.js');
 client.db = require('./database/db');
-client.player = new Player(client);
+client.player = new Player(client, {
+    deafenOnJoin: true,
+    lagMonitor: 1000,
+    ytdlOptions: {
+        filter: "audioonly",
+        quality: "highestaudio",
+        highWaterMark: 1 << 25
+    }
+});
 client.config = require('./config.js');
 client.emotes = client.config.emotes;
 client.filters = client.config.filters;
 client.commands = new Collection();
 
 require('./utils/errorHandler')(client);
+client.player.extractors.loadDefault();
 
 
-client.player.on('trackStart', (queue, track) => { queue.metadata.send(client.language.TRACKSTART(track.title, queue.connection.channel)) })
-.on('trackAdd', (queue, track) => queue.metadata.send(client.language.TRACKADD(track)))
-.on('playlistAdd', (queue, playlist) => queue.metadata.send(client.language.PLAYLISTADD(playlist)))
-// .on('searchResults', (queue, query, tracks) => {
-//     queue.metadata.send({
-//         embeds: [{
-//             color: client.color.messagecolor.greyple,
-//             author: { name: message.author.tag, icon_url: message.author.displayAvatarURL({dynamic: true}) },
-//             description: `${tracks.map((t, i) => `\`${i + 1}.\` [${t.title}](${t.url})`).join('\n')}\n\n${client.language.SEARCHRESULTS}`,
-//             footer: { text: `${client.user.username} ©`, icon_url: client.user.avatarURL() },
-//             timestamp: new Date(),
-//         }],
-//     });
-// })
-// .on('searchInvalidResponse', (queue, query, tracks, content, collector) => {
-//     if (content === 'cancel') {
-//         collector.stop();
-//         return queue.metadata.send(client.language.SEARCHINVALIDRESPONSE);
-//     } else queue.metadata.send(client.language.SEARCHERROR(tracks.length));
-// })
-// .on('searchCancel', (queue, query, tracks) => queue.metadata.send(client.language.SEARCHCANCEL))
-.on('noResults', (queue, query) => queue.metadata.send(client.language.NORESULTS(query)))
-.on('queueEnd', (queue) => queue.metadata.send(client.language.QUEUEEND))
-.on('botDisconnect', (queue) => queue.metadata.send(client.language.BOTDISCONNECT))
-.on('channelEmpty', (queue) => queue.metadata.send(client.language.CHANNELEMPTY))
-.on('connectionError', (queue, error) => { queue.metadata.send(`Error`); console.log(error) })
+client.player.events.on('playerStart', (queue, track) => { queue.metadata.channel.send(client.language.TRACKSTART(track.title, queue.connection.packets.state.channel_id)) })
+.on('emptyChannel', (queue) => queue.metadata.channel.send(client.language.CHANNELEMPTY))
+.on('playerError', (queue, error) => { queue.metadata.channel.send(`Error`); console.log(error) })
 .on('error', (queue, error) => {
     switch (error) {
         case 'NotPlaying':
-            queue.metadata.send(client.language.ERROR[0]);
+            queue.metadata.channel.send(client.language.ERROR[0]);
             break;
         case 'NotConnected':
-            queue.metadata.send(client.language.PLAY_ERROR[0]);
+            queue.metadata.channel.send(client.language.PLAY_ERROR[0]);
             break;
         case 'UnableToJoin':
-            queue.metadata.send(client.language.ERROR[1]);
+            queue.metadata.channel.send(client.language.ERROR[1]);
             break;
     };
 })
@@ -72,6 +58,7 @@ console.log('\x1b[36m%s\x1b[0m', "Naybor is loading, please wait...")
 console.log(' ')
 sleep(1050)
 console.clear();
+console.log('#\n\n')
 
 fs.readdir("./event/", (err, files) => {
     sleep(500);
@@ -120,9 +107,9 @@ fs.readdir("./command/", (err, files) => {
                     client.aliases.set(alias, props.conf.name);
                 });
             });
-            console.log("\x1b[32m", `* ${dir} category loaded.`)
         })
     });
+    console.log("\x1b[32m", `* ${files.length} categories loaded.`)
 });
   
 client.login(client.config.token);

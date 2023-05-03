@@ -9,30 +9,38 @@ module.exports={
         dir: "music",
     },
     run: async (client, message, args) => {
-        if (!message.member.voice.channel) return message.reply(client.language.PLAY_ERROR[0]);
-        if (message.guild.members.me.voice.channel && message.member.voice.channel.id !== message.guild.members.me.voice.channel.id) return message.reply(client.language.PLAY_ERROR[1]);
+        const player = client.player;
+        const channel = message.member.voice.channel;
+
+        if (!channel) return message.reply(client.language.PLAY_ERROR[0]);
+        if (message.guild.members.me.voice.channel && channel.id !== message.guild.members.me.voice.channel.id) return message.reply(client.language.PLAY_ERROR[1]);
 
         if (!args[0]) return message.reply(client.language.WRONG_USAGE(module.exports.conf.usage));
 
-        const player = client.player;
-        const queue = await player.createQueue(message.guild, {
-            metadata: message.channel
-        });
-        const song = await player.search(args.join(" "), {
-            requestedBy: message.author,
-            searchEngine: QueryType.AUTO
-        });
-        if(!song || !song.tracks.length) return message.reply(client.language.PLAY_ERR[2])
-
+        const searchResult = await player.search(args.join(" "), { requestedBy: message.author, searchEngine: QueryType.AUTO });
+        if (!searchResult.hasTracks()) { return message.reply(client.language.PLAY_ERR[2]) };
+        
         try {
-            if(!queue.connection) await queue.connect(message.member.voice.channel);
-        } catch (e) {
-            player.deleteQueue(message.guild.id)
-            message.reply(client.language.ERROR[1]);
-            console.log(e)
-        }
+            if(searchResult.playlist) {
+                await message.reply({ content: client.language.PLAYLISTADD(searchResult.playlist) })
+            } else {
+                await message.reply({ content: client.language.TRACKADD(searchResult.tracks[0]) })
+            }
 
-        song.playlist ? queue.addTracks(song.tracks) : queue.addTrack(song.tracks[0]);
-        if(!queue.playing) await queue.play();
+            await player.play(channel, searchResult, {
+                nodeOptions: {
+                    metadata: {
+                        channel: message.channel,
+                        client: message.guild?.members.me,
+                        requestedBy: message.author.username
+                    },
+                    leaveOnEnd: true,
+                    leaveOnEndCooldown: 50000,
+                    volume: 90
+                }
+            });
+        } catch (e) {
+            return message.channel.send(client.language.ERROR[1]);
+        }
     }
 };

@@ -10,13 +10,13 @@ module.exports={
         if (!message.member.voice.channel) return message.reply(client.language.PLAY_ERROR[0]);
         if (message.guild.members.me.voice.channel && message.member.voice.channel.id !== message.guild.members.me.voice.channel.id) return message.reply(client.language.PLAY_ERROR[1]);
 
-        const queue = client.player.getQueue(message.guild.id);
-        if (!queue || !queue.playing) return message.reply(client.language.ERROR[0]);
+        const queue = client.player.nodes.get(message.guild.id);
+        if (!queue || !queue.node.isPlaying()) return message.reply(client.language.ERROR[0]);
 
         const filtersStatuses = [[], []];
         client.filters.forEach((filterName) => {
             const array = filtersStatuses[0].length > filtersStatuses[1].length ? filtersStatuses[1] : filtersStatuses[0];
-            array.push(filterName.charAt(0).toUpperCase() + filterName.slice(1) + " **»** " + (queue.getFiltersEnabled().includes(filterName) ? client.emotes.v : client.emotes.x));
+            array.push(filterName.charAt(0).toUpperCase() + filterName.slice(1) + " **»** " + (queue.filters.ffmpeg.isEnabled(filterName) ? client.emotes.v : client.emotes.x));
         });
 
         message.reply({embeds: [{

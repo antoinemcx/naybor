@@ -15,19 +15,23 @@ module.exports={
         if (!args[0]) return message.reply(client.language.WRONG_USAGE(module.exports.conf.usage));
 
         const player = client.player;
-        const song = await player.search(args.join(" "), {
+        const searchResult = await player.search(args.join(" "), {
             requestedBy: message.author,
             searchEngine: QueryType.AUTO
         });
-        if(!song || !song.tracks.length) return message.reply(client.language.PLAY_ERR[2])
-        const queue = await player.createQueue(message.guild, {
-            metadata: message.channel
+        if(!searchResult || !searchResult.hasTracks()) return message.reply(client.language.PLAY_ERR[2])
+        const queue = player.nodes.create(message.guild, {
+            metadata: {
+                channel:message.channel,
+                client: message.guild?.members.me,
+                requestedBy: message.author.username
+            }
         });
 
         message.reply({embeds: [{
             color: client.color.messagecolor.greyple,
             author: { name: message.author.tag, icon_url: message.author.displayAvatarURL({dynamic: true}), url: `https://github.com/antoinemcx/naybor` },
-            description: `${song.tracks.slice(0, 10).map((t, i) => `\`${i + 1}.\` [${t.title}](${t.url})`).join('\n')}\n\n${client.language.SEARCHRESULTS}`,
+            description: `${searchResult.tracks.slice(0, 10).map((t, i) => `\`${i + 1}.\` [${t.title}](${t.url})`).join('\n')}\n\n${client.language.SEARCHRESULTS}`,
             footer: { text: `${client.user.username} ©`, icon_url: client.user.avatarURL() },
             timestamp: new Date(),
         }]})
@@ -41,18 +45,20 @@ module.exports={
             if (query.content.toLowerCase() === 'cancel') return message.channel.send(client.language.SEARCHINVALIDRESPONSE) && collector.stop();
 
             const value = parseInt(query.content);
-            if (!value || value <= 0 || value > song.tracks.slice(0, 10).length) return message.channel.send(client.language.SEARCHERROR(tracks.length));
+            if (!value || value <= 0 || value > searchResult.tracks.slice(0, 10).length) return message.channel.send(client.language.SEARCHERROR(tracks.length));
             collector.stop();
 
             try {
                 if (!queue.connection) await queue.connect(message.member.voice.channel);
             } catch {
-                await player.deleteQueue(message.guild.id);
+                await queue.delete()
                 return message.channel.send(client.language.ERRROR[1]);
             }
 
-            queue.addTrack(song.tracks[query.content - 1]);
-            if (!queue.playing) await queue.play();
+            await queue.addTrack(searchResult.tracks[query.content - 1]);
+            await message.reply({ content: client.language.TRACKADD(searchResult.tracks[query.content - 1]) });
+
+            if (!queue.isPlaying()) await queue.node.play();
         });
 
         collector.on('end', (msg, reason) => {
