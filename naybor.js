@@ -8,6 +8,7 @@ module.exports = client;
 
 const fs = require('fs');
 const { Player } = require('discord-player');
+const { DefaultExtractors } = require('@discord-player/extractor');
 
 //SET COLLECTION
 client.commandes = new Collection();
@@ -32,7 +33,7 @@ client.filters = client.config.filters;
 client.commands = new Collection();
 
 require('./utils/errorHandler')(client);
-client.player.extractors.loadDefault();
+client.player.extractors.loadMulti(DefaultExtractors);
 
 
 client.player.events.on('playerStart', (queue, track) => { queue.metadata.channel.send(client.language.TRACKSTART(track.title, queue.connection.packets.state.channel_id)) })
