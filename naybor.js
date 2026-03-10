@@ -36,7 +36,6 @@ client.commands = new Collection();
 require('./utils/errorHandler')(client);
 client.player.extractors.loadMulti(DefaultExtractors);
 
-
 client.player.events.on('playerStart', (queue, track) => { queue.metadata.channel.send(client.language.TRACKSTART(track.title, queue.connection.packets.state.channel_id)) })
 .on('emptyChannel', (queue) => queue.metadata.channel.send(client.language.CHANNELEMPTY))
 .on('playerError', (queue, error) => { queue.metadata.channel.send(`Error`); console.log(error) })

@@ -34,46 +34,43 @@
 
 ## Setup the bot
 
-### Configuration
-For the configuration, rename the `config-example.js` file to `config.js` and replace the following values :
-```js
-module.exports = {
-    token: '',
-    prefix: '',
-    owner: "",
-    db: {
-        host: "",
-        user: "",
-        password: "",
-        database: "",
-    },
-    serverID: "",
-    logChannel: "",
-    
-    emotes: {},
-};
-```
+### Local setup
+#### Configuration
+For the configuration, rename the `config-example.js` file to `config.js` and the `.env.example` file to `.env`, then fill in the required fields in both files.
 
-### Installation
+#### Installation
 ```sh
 $ npm install
 ```
 
-### MariaDB
+#### MariaDB
 
 Naybor runs on the MariaDB database, a slightly modified version of MySQL.<br>
 First, create the database. The name of the database must be the same as the one set in the `config.js` file  
 
 ![](https://i.imgur.com/ALeKvsf.png)
 
-#### After creating the database, run the following command :
+After creating the database, run the following command :
 ```sh
 $ npm run migration
 ```
 
-### Start the bot
+#### Start the bot
 ```sh
 $ npm start
+```
+
+### Docker setup
+#### Prerequisites
+Make sure you have Docker and Docker Compose installed on your machine.
+
+#### Configuration
+For the configuration, rename the `config-example.js` file to `config.js` and the `.env.example` file to `.env`, then fill in the required fields in both files.  
+Make sure to set the `DB_HOST` field in the `.env` file to `db` (or the name of the database service in the `docker-compose.yml` file) to allow the bot to connect to the database container.
+
+#### Start the bot
+```sh
+$ docker-compose up -d
 ```
 
 <br>
