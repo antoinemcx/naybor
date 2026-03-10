@@ -5,6 +5,7 @@ const client = new Client({
     allowedMentions: { parse: ['users', 'roles'], repliedUser: false },
 });
 module.exports = client;
+const path = require("path");
 
 const fs = require('fs');
 const { Player } = require('discord-player');
@@ -61,7 +62,7 @@ sleep(1050)
 console.clear();
 console.log('#\n\n')
 
-fs.readdir("./event/", (err, files) => {
+fs.readdir(path.join(__dirname, "event/"), (err, files) => {
     sleep(500);
 
     if (err) console.log(err);
@@ -73,7 +74,7 @@ fs.readdir("./event/", (err, files) => {
     console.log("\x1b[32m", `* ${files.length} events loaded.`)
 });
 
-fs.readdir('./utils/', (err, files) => {
+fs.readdir(path.join(__dirname, 'utils/'), (err, files) => {
     sleep(500);
 
     if (err) console.log(err);
@@ -84,7 +85,7 @@ fs.readdir('./utils/', (err, files) => {
     console.log("\x1b[32m", `* ${files.length} utilities loaded.`);
 });
 
-fs.readdir('./language/', (err, files) => {
+fs.readdir(path.join(__dirname, 'language/'), (err, files) => {
     sleep(500);
 
     if (err) console.log(err);
@@ -94,12 +95,12 @@ fs.readdir('./language/', (err, files) => {
     console.log("\x1b[32m", `* ${files.length} languages loaded.`);
 });
 
-fs.readdir("./command/", (err, files) => {
+fs.readdir(path.join(__dirname, "command/"), (err, files) => {
     sleep(500);
 
     if (err) console.log(err);
     files.forEach(dir => {
-        fs.readdir('./command/'+ dir +'/', (err, file) => {
+        fs.readdir(path.join(__dirname, 'command/' + dir + '/'), (err, file) => {
             if (err) console.log(err);
             file.forEach(f => {
                 const props = require(`./command/${dir}/${f}`);
