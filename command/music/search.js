@@ -19,7 +19,7 @@ module.exports={
             requestedBy: message.author,
             searchEngine: QueryType.AUTO
         });
-        if(!searchResult || !searchResult.hasTracks()) return message.reply(client.language.PLAY_ERR[2])
+        if(!searchResult || !searchResult.hasTracks()) return message.reply(client.language.PLAY_ERROR[2])
         const queue = player.nodes.create(message.guild, {
             metadata: {
                 channel:message.channel,

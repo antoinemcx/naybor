@@ -23,7 +23,7 @@ module.exports = {
 
     // SINGLE LINE COMMANDS
     PLAY_ERROR: [ `${emotes.x} You have to be in a voice channel to use this command`, `${emotes.x} You have to be in the same voice channel as me`,
-    `${emotes.x} An error occurred while adding sound..` ],
+    `${emotes.x} An error occurred while adding sound...` ],
     NOWPLAYING: [ `Channel`, `Duration`, "from playlist", "music", "Requested by", "Progress bar" ],
     QUEUE: [ `Queue for`, "Current song", "Requested by", "song", "in the queue" ],
     SHUFFLE: (length) => `${emotes.v} Queue correctly shuffled (**${length}** songs)`,

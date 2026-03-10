@@ -22,7 +22,7 @@ module.exports={
             requestedBy: message.author,
             searchEngine: QueryType.AUTO
         });
-        if(!searchResult || !searchResult.hasTracks()) return message.reply(client.language.PLAY_ERR[2])
+        if(!searchResult || !searchResult.hasTracks()) return message.reply(client.language.PLAY_ERROR[2])
 
         await queue.insertTrack(searchResult.tracks[0]);
         await message.reply(client.language.PLAYNEXT(searchResult.tracks[0]));

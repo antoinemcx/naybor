@@ -18,7 +18,7 @@ module.exports={
         if (!args[0]) return message.reply(client.language.WRONG_USAGE(module.exports.conf.usage));
 
         const searchResult = await player.search(args.join(" "), { requestedBy: message.author, searchEngine: QueryType.AUTO });
-        if (!searchResult.hasTracks()) { return message.reply(client.language.PLAY_ERR[2]) };
+        if (!searchResult.hasTracks()) { return message.reply(client.language.PLAY_ERROR[2]) };
         
         try {
             if(searchResult.playlist) {

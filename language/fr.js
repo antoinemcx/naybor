@@ -23,7 +23,7 @@ module.exports = {
 
     // SINGLE LINE COMMANDS
     PLAY_ERROR: [ `${emotes.x} Vous devez être dans un salon vocal afin d'utiliser cette commande`, `${emotes.x} Vous devez être dans le même salon vocal que moi`,
-    `${emotes.x} Une erreur a eu lieu en essayant d'ajouter la piste audio..` ],
+    `${emotes.x} Une erreur a eu lieu en essayant d'ajouter la piste audio...` ],
     NOWPLAYING: [ `Chaîne`, `Durée`, "Dans la playlist", "Musique", "Demandée par", "Barre de progression" ],
     QUEUE: [ `File d'attente pour`, "Piste audio actuelle", "Demandée par", "piste audio", "dans la file d'attente" ],
     SHUFFLE: (length) => `${emotes.v} La file d'attente a bien été mélangé (**${length}** pistes audio)`,
